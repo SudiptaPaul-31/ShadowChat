@@ -45,3 +45,7 @@ pnpm dev
 # or
 bun dev
 ```
+4. Build commands:
+```bash
+npm run build
+```
