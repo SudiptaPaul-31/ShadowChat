@@ -1,70 +1,22 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { ChevronRight, Shield, Users, Lock, Vote, Zap, MessageSquare } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import {
+  ChevronRight,
+  Shield,
+  Users,
+  Lock,
+  Vote,
+  Zap,
+  MessageSquare,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/NavBar";
 
 export default function Home() {
-  const handleScroll = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      })
-    }
-  }
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 border-b backdrop-blur-sm bg-background/80">
-        <div className="container flex h-16 items-center justify-between mx-auto px-4">
-          <div className="flex items-center gap-2">
-            <div className="relative h-8 w-8 overflow-hidden rounded-lg bg-gradient-to-br from-indigo-500 to-purple-700">
-              <div className="absolute inset-0 opacity-80 mix-blend-overlay">
-                <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                  <path
-                    d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12Z"
-                    fill="white"
-                    fillOpacity=".8"
-                  />
-                </svg>
-              </div>
-            </div>
-            <button
-              onClick={() => handleScroll("hero")}
-              className="text-xl font-bold tracking-tight bg-gradient-to-r from-indigo-400 to-purple-600 bg-clip-text text-transparent cursor-pointer"
-            >
-              ShadowChat
-            </button>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <button
-              onClick={() => handleScroll("features")}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Features
-            </button>
-            <button
-              onClick={() => handleScroll("technology")}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Technology
-            </button>
-          </nav>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="hidden md:flex">
-              Login
-            </Button>
-            <Button
-              size="sm"
-              className="bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
-            >
-              Join Waitlist
-            </Button>
-          </div>
-        </div>
-      </header>
-
+      <Navbar />;
       <main className="flex-1">
         {/* Hero Section */}
         <section id="hero" className="relative">
@@ -84,8 +36,8 @@ export default function Home() {
                   <span className="block">Decentralized Social Network</span>
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                  Express yourself freely in a secure, end-to-end encrypted platform with complete control over your
-                  digital identity.
+                  Express yourself freely in a secure, end-to-end encrypted
+                  platform with complete control over your digital identity.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -117,9 +69,12 @@ export default function Home() {
                         <div className="rounded-full bg-indigo-500/10 p-2 w-fit">
                           <MessageSquare className="h-5 w-5 text-indigo-500" />
                         </div>
-                        <h3 className="text-lg font-semibold mt-4">Encrypted Messages</h3>
+                        <h3 className="text-lg font-semibold mt-4">
+                          Encrypted Messages
+                        </h3>
                         <p className="text-sm text-muted-foreground">
-                          End-to-end encrypted conversations that remain private and secure.
+                          End-to-end encrypted conversations that remain private
+                          and secure.
                         </p>
                       </div>
                     </div>
@@ -134,9 +89,12 @@ export default function Home() {
                         <div className="rounded-full bg-purple-500/10 p-2 w-fit">
                           <Users className="h-5 w-5 text-purple-500" />
                         </div>
-                        <h3 className="text-lg font-semibold mt-4">Anonymous Communities</h3>
+                        <h3 className="text-lg font-semibold mt-4">
+                          Anonymous Communities
+                        </h3>
                         <p className="text-sm text-muted-foreground">
-                          Join groups with like-minded individuals while maintaining your privacy.
+                          Join groups with like-minded individuals while
+                          maintaining your privacy.
                         </p>
                       </div>
                     </div>
@@ -147,13 +105,17 @@ export default function Home() {
                 <div className="flex items-center justify-center p-2 md:p-8">
                   <div className="flex items-center gap-2">
                     <Lock className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-xs md:text-sm text-muted-foreground">Zero-knowledge Authentication</span>
+                    <span className="text-xs md:text-sm text-muted-foreground">
+                      Zero-knowledge Authentication
+                    </span>
                   </div>
                 </div>
                 <div className="flex items-center justify-center p-2 md:p-8">
                   <div className="flex items-center gap-2">
                     <Shield className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-xs md:text-sm text-muted-foreground">Starknet Powered Security</span>
+                    <span className="text-xs md:text-sm text-muted-foreground">
+                      Starknet Powered Security
+                    </span>
                   </div>
                 </div>
               </div>
@@ -165,10 +127,12 @@ export default function Home() {
         <section id="features" className="py-16 md:py-24 bg-muted/30">
           <div className="container space-y-12 mx-auto px-4">
             <div className="text-center space-y-4 max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Key Features</h2>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                Key Features
+              </h2>
               <p className="text-muted-foreground text-lg">
-                ShadowChat combines cutting-edge technology with user-friendly design to provide a secure and private
-                communication platform.
+                ShadowChat combines cutting-edge technology with user-friendly
+                design to provide a secure and private communication platform.
               </p>
             </div>
 
@@ -182,7 +146,8 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl font-semibold">Anonymous Profiles</h3>
                   <p className="text-muted-foreground">
-                    Engage with the platform without linking your real-world identity, maintaining complete privacy.
+                    Engage with the platform without linking your real-world
+                    identity, maintaining complete privacy.
                   </p>
                 </div>
               </div>
@@ -196,7 +161,8 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl font-semibold">Encrypted Messaging</h3>
                   <p className="text-muted-foreground">
-                    End-to-end encryption ensures your conversations remain private and unreadable to third parties.
+                    End-to-end encryption ensures your conversations remain
+                    private and unreadable to third parties.
                   </p>
                 </div>
               </div>
@@ -210,7 +176,8 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl font-semibold">Private Communities</h3>
                   <p className="text-muted-foreground">
-                    Create and join chat groups with like-minded individuals, all while maintaining anonymity.
+                    Create and join chat groups with like-minded individuals,
+                    all while maintaining anonymity.
                   </p>
                 </div>
               </div>
@@ -222,10 +189,12 @@ export default function Home() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/10">
                     <Lock className="h-5 w-5 text-purple-500" />
                   </div>
-                  <h3 className="text-xl font-semibold">Zero-Knowledge Authentication</h3>
+                  <h3 className="text-xl font-semibold">
+                    Zero-Knowledge Authentication
+                  </h3>
                   <p className="text-muted-foreground">
-                    Verify your identity without revealing personal information through advanced cryptographic
-                    techniques.
+                    Verify your identity without revealing personal information
+                    through advanced cryptographic techniques.
                   </p>
                 </div>
               </div>
@@ -239,7 +208,8 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl font-semibold">On-Chain Governance</h3>
                   <p className="text-muted-foreground">
-                    Implement smart contract-based rules and democratic voting mechanisms within communities.
+                    Implement smart contract-based rules and democratic voting
+                    mechanisms within communities.
                   </p>
                 </div>
               </div>
@@ -251,9 +221,12 @@ export default function Home() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/10">
                     <Zap className="h-5 w-5 text-purple-500" />
                   </div>
-                  <h3 className="text-xl font-semibold">Starknet Integration</h3>
+                  <h3 className="text-xl font-semibold">
+                    Starknet Integration
+                  </h3>
                   <p className="text-muted-foreground">
-                    Fast and low-cost transactions powered by Starknet&apos;s Layer 2 scalability solutions.
+                    Fast and low-cost transactions powered by Starknet&apos;s
+                    Layer 2 scalability solutions.
                   </p>
                 </div>
               </div>
@@ -266,10 +239,12 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Built with Modern Technology</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
+                  Built with Modern Technology
+                </h2>
                 <p className="text-lg text-muted-foreground">
-                  ShadowChat leverages cutting-edge web3 technologies to provide a secure, private, and decentralized
-                  communication platform.
+                  ShadowChat leverages cutting-edge web3 technologies to provide
+                  a secure, private, and decentralized communication platform.
                 </p>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-2">
@@ -277,9 +252,12 @@ export default function Home() {
                       <ChevronRight className="h-4 w-4 text-primary" />
                     </div>
                     <div>
-                      <span className="font-medium text-xl">Next.js & TypeScript</span>
+                      <span className="font-medium text-xl">
+                        Next.js & TypeScript
+                      </span>
                       <p className="text-sm text-muted-foreground">
-                        Optimized for a fast and scalable web experience with type-safe code.
+                        Optimized for a fast and scalable web experience with
+                        type-safe code.
                       </p>
                     </div>
                   </li>
@@ -288,9 +266,12 @@ export default function Home() {
                       <ChevronRight className="h-4 w-4 text-primary" />
                     </div>
                     <div>
-                      <span className="font-medium text-xl">Starknet & Cairo Smart Contracts</span>
+                      <span className="font-medium text-xl">
+                        Starknet & Cairo Smart Contracts
+                      </span>
                       <p className="text-sm text-muted-foreground">
-                        Secure, scalable interactions on the Starknet Layer 2 ecosystem.
+                        Secure, scalable interactions on the Starknet Layer 2
+                        ecosystem.
                       </p>
                     </div>
                   </li>
@@ -299,7 +280,9 @@ export default function Home() {
                       <ChevronRight className="h-4 w-4 text-primary" />
                     </div>
                     <div>
-                      <span className="font-medium text-xl">IPFS & Arweave Storage</span>
+                      <span className="font-medium text-xl">
+                        IPFS & Arweave Storage
+                      </span>
                       <p className="text-sm text-muted-foreground">
                         Decentralized storage solutions for messages and media.
                       </p>
@@ -310,9 +293,12 @@ export default function Home() {
                       <ChevronRight className="h-4 w-4 text-primary" />
                     </div>
                     <div>
-                      <span className="font-medium text-xl">Web3 Authentication</span>
+                      <span className="font-medium text-xl">
+                        Web3 Authentication
+                      </span>
                       <p className="text-sm text-muted-foreground">
-                        Secure wallet-based login using Starknet wallets (ArgentX & Braavos).
+                        Secure wallet-based login using Starknet wallets
+                        (ArgentX & Braavos).
                       </p>
                     </div>
                   </li>
@@ -327,7 +313,9 @@ export default function Home() {
                       <div className="relative w-4/5 aspect-square rounded-full bg-gradient-to-br from-indigo-500/40 to-purple-700/40 flex items-center justify-center">
                         <div className="w-4/5 aspect-square rounded-full bg-gradient-to-br from-indigo-500/50 to-purple-700/50 flex items-center justify-center">
                           <div className="text-white font-bold text-center">
-                            <div className="text-xs sm:text-sm md:text-base lg:text-lg">STARKNET</div>
+                            <div className="text-xs sm:text-sm md:text-base lg:text-lg">
+                              STARKNET
+                            </div>
                             <div className="text-xs opacity-70">POWERED</div>
                           </div>
                         </div>
@@ -351,7 +339,8 @@ export default function Home() {
                     Ready to Experience the Future of Private Communication?
                   </h2>
                   <p className="text-muted-foreground">
-                    Join our waitlist to be among the first to access ShadowChat when we launch.
+                    Join our waitlist to be among the first to access ShadowChat
+                    when we launch.
                   </p>
                 </div>
                 <Button
@@ -365,7 +354,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
       <footer className="border-t py-6 md:py-0">
         <div className="container flex flex-col md:h-24 md:flex-row items-center justify-between gap-4 mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-2">
@@ -375,18 +363,27 @@ export default function Home() {
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link
+              href="#"
+              className="text-xs text-muted-foreground hover:text-foreground"
+            >
               Privacy Policy
             </Link>
-            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link
+              href="#"
+              className="text-xs text-muted-foreground hover:text-foreground"
+            >
               Terms of Service
             </Link>
-            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link
+              href="#"
+              className="text-xs text-muted-foreground hover:text-foreground"
+            >
               Contact
             </Link>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
