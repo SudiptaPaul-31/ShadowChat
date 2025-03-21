@@ -2,21 +2,27 @@
 
 import { ChevronRight, Shield, Users, Lock, Vote, Zap, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+import Navbar from "@/components/ui/Navbar"
 import Footer from "@/components/Footer"
 
+
 export default function Home() {
-  const handleScroll = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      })
-    }
-  }
+
+  // const handleScroll = (id: string) => {
+  //   const element = document.getElementById(id)
+  //   if (element) {
+  //     element.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //     })
+  //   }
+  // }
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 border-b backdrop-blur-sm bg-background/80">
+
+      <Navbar />
+      {/* <header className="sticky top-0 z-50 border-b backdrop-blur-sm bg-background/80">
         <div className="container flex h-16 items-center justify-between mx-auto px-4">
           <div className="flex items-center gap-2">
             <div className="relative h-8 w-8 overflow-hidden rounded-lg bg-gradient-to-br from-indigo-500 to-purple-700">
@@ -63,7 +69,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
-      </header>
+      </header> */}
 
       <main className="flex-1">
         {/* Hero Section */}
