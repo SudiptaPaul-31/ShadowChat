@@ -1,19 +1,14 @@
 "use client";
 
-import { ChevronRight } from "lucide-react";
-
-import { Shield, Users, Lock, Vote, Zap, MessageSquare } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import Hero from "@/components/home/hero";
 
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/Footer";
 
-import Features from "@/components/ui/Features";
+import Features from "@/components/features/Features";
 
 import Technology from "@/components/technology/Technology";
-
 
 export default function Home() {
   // const handleScroll = (id: string) => {
@@ -83,12 +78,11 @@ export default function Home() {
 
         {/* Features Section */}
         <section id="features" className="py-16 md:py-24 bg-muted/30">
-
           <Features />
         </section>
-       
+
         {/* Technology Section */}
-        
+
         <Technology />
 
         {/* Cta Section */}
