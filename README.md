@@ -1,5 +1,32 @@
-# ShadowChat: The Future Of Anonymous Social Networking
-![ShadowChat](https://hackmd.io/_uploads/S1040x021l.png)
+<p align="center">
+ <img src="./assets/ShadowChat.png" width='200' />
+</p>
+
+<h1 align="center">ShadowChat: Privacy-Focused Decentralized Social Network</h1>
+
+<p align="center">
+  <a href="https://your-build-link-here">
+    <img src="https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&flat" alt="Build Status">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://cairo-lang.org">
+    <img src="https://img.shields.io/badge/-%F0%9F%90%AB%20%20Cairo-black?style=for-the-badge&flat&logo=Cairo" alt="Cairo">
+  </a>
+  <a href="https://reactjs.org">
+    <img src="https://img.shields.io/badge/-React-black?style=for-the-badge&flat&logo=react" alt="React">
+  </a>
+  <a href="https://nextjs.org/">
+    <img src="https://img.shields.io/badge/-Next.js-black?style=for-the-badge&flat&logo=next.js" alt="Next.js">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://t.me/shadowchat_od">
+    <img src="https://img.shields.io/badge/-Telegram-blue?style=for-the-badge&flat&logo=telegram" alt="Telegram">
+  </a>
+</p>
 
 ## Overview
 ShadowChat is a **privacy-first decentralized social platform** built on **Starknet**, enabling users to engage in **anonymous discussions**, form **hidden communities**, and communicate securely without revealing their real-world identities.
@@ -67,8 +94,11 @@ ShadowChat is an **open-source privacy-focused social network**, and we welcome 
 - **🐛 Report Issues & Request Features** – Submit bug reports or feature requests via [GitHub Issues](https://github.com/SudiptaPaul-31/ShadowChat/issues). 
 
 ### Contributors 
-A huge thanks to everyone who has contributed to building ShadowChat: 
-@SudiptaPaul-31, @Dannynsikak, @Special7ka, @JayWebtech, @jhoncarter7, @anneyomeje, @Jayrodri088, @rajanarahul93, @murthy-001, @chiscookeke11 
+<a href="https://github.com/nn3-oma/shadowchat/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=nn3-oma/shadowchat" />
+</a>
+
+<br/>
 
 Want to be part of this list? **Start contributing today!** 
 
