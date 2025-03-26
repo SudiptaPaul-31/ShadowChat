@@ -2,7 +2,7 @@
 
 import Hero from "@/components/home/hero";
 import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer/page";
 import Features from "@/components/features/Features";
 import Technology from "@/components/technology/Technology";
 import CTASection from "@/components/CTASection"; // Importing the new CTA component
