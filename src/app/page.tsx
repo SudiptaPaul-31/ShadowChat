@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import Hero from "@/components/home/hero";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/Footer";
