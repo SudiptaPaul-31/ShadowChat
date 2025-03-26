@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ShadowChat",
   description: "Privacy-focused, decentralized social network",
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({
