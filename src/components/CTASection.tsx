@@ -19,7 +19,7 @@ export default function CTASection() {
             </div>
             <Button
               size="lg"
-              className="bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800 shadow-md min-w-36"
+              className="bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800 shadow-md min-w-36 dark:text-white"
             >
               Join Waitlist
             </Button>

@@ -1,9 +1,19 @@
+'use client'
+
 import Image from "next/image";
 import { Button } from "./button";
-
-
+import { Switch } from "@/components/ui/switch";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+    const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    // After hydration, we can safely show the UI that depends on the theme
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const handleScroll = (id: string) => {
         const element = document.getElementById(id)
@@ -42,12 +52,20 @@ export default function Navbar() {
                     </button>
                 </nav>
                 <div className="flex items-center gap-2">
+                    {mounted && (
+                        <Switch 
+                            checked={theme === "dark"}
+                            onCheckedChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+                            className={`${theme === "light" ? "bg-gradient-to-r from-indigo-500 to-purple-700" : ""}`}
+                            aria-label="Toggle theme"    
+                        />
+                    )}
                     <Button variant="ghost" size="sm" className="hidden md:flex">
                         Login
                     </Button>
                     <Button
                         size="sm"
-                        className="bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
+                        className="bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800 dark:text-white"
                     >
                         Join Waitlist
                     </Button>
