@@ -5,9 +5,8 @@ import logo from './../../logos/logo.png'
 import Link from 'next/link'
 
 export default function Custom404() {
-  /*For the second background option, just remove -2 from bg-[url(/images/bg-404-2.jpg)] leaving the code like this: <section className="bg-[url(/images/bg-404.jpg)] ... ">...</section> */
   return (
-    <section className="bg-[url(/images/bg-404-2.jpg)] relative flex flex-col justify-center min-h-screen  bg-center bg-no-repeat bg-cover">
+    <section className="bg-[url(/images/bg-404.jpg)] relative flex flex-col justify-center min-h-screen  bg-center bg-no-repeat bg-cover">
       <div className="absolute z-0 inset-0 bg-black/65"></div>
 
       <div className="z-10">
