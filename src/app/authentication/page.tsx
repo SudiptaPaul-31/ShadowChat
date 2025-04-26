@@ -1,7 +1,13 @@
-import React from "react";
-import WalletConnectButtons from "@/components/WalletConnectButtons";
+"use client";
+
+import React, { useState } from "react";
+import { WalletModal } from "@/components/WalletModal";
+import { Button } from "@/components/ui/button";
+import { Wallet } from "lucide-react";
 
 export default function Authentication() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section id="authentication" className="relative min-h-screen">
       {/* Background Grid and Gradient */}
@@ -21,8 +27,21 @@ export default function Authentication() {
           </p>
         </div>
 
-        {/* Wallet Connect Buttons */}
-        <WalletConnectButtons />
+        {/* Wallet Connect Button */}
+        <div className="flex justify-center">
+          <Button
+            size="lg"
+            className="bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
+            onClick={() => setIsModalOpen(true)}
+          >
+            <Wallet className="mr-2 h-5 w-5" />
+            Connect Wallet
+          </Button>
+          <WalletModal 
+            isOpen={isModalOpen}
+            onOpenChange={setIsModalOpen}
+          />
+        </div>
 
         {/* Info Card */}
         <div className="relative mx-auto max-w-3xl rounded-xl border bg-background shadow-xl">
