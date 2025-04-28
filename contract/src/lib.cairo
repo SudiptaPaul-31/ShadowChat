@@ -30,3 +30,5 @@ mod HelloStarknet {
         }
     }
 }
+
+pub mod message;
