@@ -14,11 +14,8 @@ pub trait IMessageStorage<TContractState> {
 pub mod MessageStorage {
     use starknet::ContractAddress;
     use starknet::storage::{
-        Map, 
-        StorageMapWriteAccess, 
-        StorageMapReadAccess, 
+        Map,  
         StoragePointerReadAccess,
-        StoragePointerWriteAccess, 
         StoragePathEntry, 
         MutableVecTrait, 
         Vec, 
@@ -38,6 +35,9 @@ pub mod MessageStorage {
     impl MessageStorageImpl of IMessageStorage<ContractState> {
         // Store a message
         fn store_message(ref self: ContractState, recipient: ContractAddress, message: ByteArray) {
+            // Check if message is empty
+            assert(message.len() != 0, 'Message cannot be empty');
+            
             let recipient_messages = self.messages.entry(recipient);
 
             // Append the message to the recipient's message vector
