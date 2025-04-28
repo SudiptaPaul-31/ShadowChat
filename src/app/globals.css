@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @plugin "tailwindcss-animate";
 
@@ -120,4 +120,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@utility gradient-text {
+  @apply bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 bg-clip-text text-transparent;
 }
