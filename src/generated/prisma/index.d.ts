@@ -1245,7 +1245,8 @@ export namespace Prisma {
     username: string | null
     email: string | null
     passwordHash: string | null
-    profilePicUrl: string | null
+    walletAddress: string | null
+    avatar: string | null
     status: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1256,7 +1257,8 @@ export namespace Prisma {
     username: string | null
     email: string | null
     passwordHash: string | null
-    profilePicUrl: string | null
+    walletAddress: string | null
+    avatar: string | null
     status: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1267,7 +1269,8 @@ export namespace Prisma {
     username: number
     email: number
     passwordHash: number
-    profilePicUrl: number
+    walletAddress: number
+    avatar: number
     status: number
     createdAt: number
     updatedAt: number
@@ -1280,7 +1283,8 @@ export namespace Prisma {
     username?: true
     email?: true
     passwordHash?: true
-    profilePicUrl?: true
+    walletAddress?: true
+    avatar?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -1291,7 +1295,8 @@ export namespace Prisma {
     username?: true
     email?: true
     passwordHash?: true
-    profilePicUrl?: true
+    walletAddress?: true
+    avatar?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -1302,7 +1307,8 @@ export namespace Prisma {
     username?: true
     email?: true
     passwordHash?: true
-    profilePicUrl?: true
+    walletAddress?: true
+    avatar?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -1384,9 +1390,10 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: string
     username: string
-    email: string
-    passwordHash: string
-    profilePicUrl: string | null
+    email: string | null
+    passwordHash: string | null
+    walletAddress: string
+    avatar: string | null
     status: string | null
     createdAt: Date
     updatedAt: Date
@@ -1414,7 +1421,8 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     passwordHash?: boolean
-    profilePicUrl?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1429,7 +1437,8 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     passwordHash?: boolean
-    profilePicUrl?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1440,7 +1449,8 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     passwordHash?: boolean
-    profilePicUrl?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1451,13 +1461,14 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     passwordHash?: boolean
-    profilePicUrl?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "passwordHash" | "profilePicUrl" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "passwordHash" | "walletAddress" | "avatar" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     groupsCreated?: boolean | User$groupsCreatedArgs<ExtArgs>
     groupMemberships?: boolean | User$groupMembershipsArgs<ExtArgs>
@@ -1477,9 +1488,10 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       username: string
-      email: string
-      passwordHash: string
-      profilePicUrl: string | null
+      email: string | null
+      passwordHash: string | null
+      walletAddress: string
+      avatar: string | null
       status: string | null
       createdAt: Date
       updatedAt: Date
@@ -1913,7 +1925,8 @@ export namespace Prisma {
     readonly username: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly passwordHash: FieldRef<"User", 'String'>
-    readonly profilePicUrl: FieldRef<"User", 'String'>
+    readonly walletAddress: FieldRef<"User", 'String'>
+    readonly avatar: FieldRef<"User", 'String'>
     readonly status: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
@@ -5662,7 +5675,8 @@ export namespace Prisma {
     username: 'username',
     email: 'email',
     passwordHash: 'passwordHash',
-    profilePicUrl: 'profilePicUrl',
+    walletAddress: 'walletAddress',
+    avatar: 'avatar',
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -5784,9 +5798,10 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
     username?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    passwordHash?: StringFilter<"User"> | string
-    profilePicUrl?: StringNullableFilter<"User"> | string | null
+    email?: StringNullableFilter<"User"> | string | null
+    passwordHash?: StringNullableFilter<"User"> | string | null
+    walletAddress?: StringFilter<"User"> | string
+    avatar?: StringNullableFilter<"User"> | string | null
     status?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -5798,9 +5813,10 @@ export namespace Prisma {
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     username?: SortOrder
-    email?: SortOrder
-    passwordHash?: SortOrder
-    profilePicUrl?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    passwordHash?: SortOrderInput | SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5813,25 +5829,27 @@ export namespace Prisma {
     id?: string
     username?: string
     email?: string
+    walletAddress?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    passwordHash?: StringFilter<"User"> | string
-    profilePicUrl?: StringNullableFilter<"User"> | string | null
+    passwordHash?: StringNullableFilter<"User"> | string | null
+    avatar?: StringNullableFilter<"User"> | string | null
     status?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     groupsCreated?: GroupListRelationFilter
     groupMemberships?: GroupMemberListRelationFilter
     messages?: MessageListRelationFilter
-  }, "id" | "username" | "email">
+  }, "id" | "username" | "email" | "walletAddress">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     username?: SortOrder
-    email?: SortOrder
-    passwordHash?: SortOrder
-    profilePicUrl?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    passwordHash?: SortOrderInput | SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5846,9 +5864,10 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
     username?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
-    passwordHash?: StringWithAggregatesFilter<"User"> | string
-    profilePicUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
+    email?: StringNullableWithAggregatesFilter<"User"> | string | null
+    passwordHash?: StringNullableWithAggregatesFilter<"User"> | string | null
+    walletAddress?: StringWithAggregatesFilter<"User"> | string
+    avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
     status?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -6035,9 +6054,10 @@ export namespace Prisma {
   export type UserCreateInput = {
     id?: string
     username: string
-    email: string
-    passwordHash: string
-    profilePicUrl?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    walletAddress: string
+    avatar?: string | null
     status?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6049,9 +6069,10 @@ export namespace Prisma {
   export type UserUncheckedCreateInput = {
     id?: string
     username: string
-    email: string
-    passwordHash: string
-    profilePicUrl?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    walletAddress: string
+    avatar?: string | null
     status?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6063,9 +6084,10 @@ export namespace Prisma {
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6077,9 +6099,10 @@ export namespace Prisma {
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6091,9 +6114,10 @@ export namespace Prisma {
   export type UserCreateManyInput = {
     id?: string
     username: string
-    email: string
-    passwordHash: string
-    profilePicUrl?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    walletAddress: string
+    avatar?: string | null
     status?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6102,9 +6126,10 @@ export namespace Prisma {
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6113,9 +6138,10 @@ export namespace Prisma {
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6373,7 +6399,8 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
-    profilePicUrl?: SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6384,7 +6411,8 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
-    profilePicUrl?: SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6395,7 +6423,8 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
-    profilePicUrl?: SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7099,9 +7128,10 @@ export namespace Prisma {
   export type UserCreateWithoutGroupsCreatedInput = {
     id?: string
     username: string
-    email: string
-    passwordHash: string
-    profilePicUrl?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    walletAddress: string
+    avatar?: string | null
     status?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7112,9 +7142,10 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutGroupsCreatedInput = {
     id?: string
     username: string
-    email: string
-    passwordHash: string
-    profilePicUrl?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    walletAddress: string
+    avatar?: string | null
     status?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7187,9 +7218,10 @@ export namespace Prisma {
   export type UserUpdateWithoutGroupsCreatedInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7200,9 +7232,10 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutGroupsCreatedInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7245,9 +7278,10 @@ export namespace Prisma {
   export type UserCreateWithoutGroupMembershipsInput = {
     id?: string
     username: string
-    email: string
-    passwordHash: string
-    profilePicUrl?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    walletAddress: string
+    avatar?: string | null
     status?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7258,9 +7292,10 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutGroupMembershipsInput = {
     id?: string
     username: string
-    email: string
-    passwordHash: string
-    profilePicUrl?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    walletAddress: string
+    avatar?: string | null
     status?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7312,9 +7347,10 @@ export namespace Prisma {
   export type UserUpdateWithoutGroupMembershipsInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7325,9 +7361,10 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutGroupMembershipsInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7369,9 +7406,10 @@ export namespace Prisma {
   export type UserCreateWithoutMessagesInput = {
     id?: string
     username: string
-    email: string
-    passwordHash: string
-    profilePicUrl?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    walletAddress: string
+    avatar?: string | null
     status?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7382,9 +7420,10 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutMessagesInput = {
     id?: string
     username: string
-    email: string
-    passwordHash: string
-    profilePicUrl?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    walletAddress: string
+    avatar?: string | null
     status?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7436,9 +7475,10 @@ export namespace Prisma {
   export type UserUpdateWithoutMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7449,9 +7489,10 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
