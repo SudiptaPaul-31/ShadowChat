@@ -1,24 +1,23 @@
+
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import { z } from 'zod';
+import { PrismaClient, Prisma } from '@prisma/client';
+import { z, ZodError } from 'zod';
 
 const prisma = new PrismaClient();
 
-
 const createUserSchema = z.object({
   username: z.string().min(3).max(50),
-  walletAddress: z.string().min(42).max(42), 
+  walletAddress: z.string().length(42), 
   avatar: z.string().url().optional(),
 });
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    
+
     // Validate request body
     const validatedData = createUserSchema.parse(body);
-    
-    
+
     const user = await prisma.user.create({
       data: {
         username: validatedData.username,
@@ -27,20 +26,18 @@ export async function POST(request: Request) {
       },
     });
 
-   
-    const { passwordHash, ...userWithoutPassword } = user;
-    
-    return NextResponse.json(userWithoutPassword, { status: 201 });
-  } catch (error : any) {
-    if (error instanceof z.ZodError) {
+    // Return only relevant user fields (exclude sensitive fields manually if needed)
+    return NextResponse.json(user, { status: 201 });
+
+  } catch (error: unknown) {
+    if (error instanceof ZodError) {
       return NextResponse.json(
         { error: 'Invalid request data', details: error.errors },
         { status: 400 }
       );
     }
-    
-    // Handle unique constraint violations
-    if (error.code === 'P2002') {
+
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
       return NextResponse.json(
         { error: 'Username or wallet address already exists' },
         { status: 409 }
@@ -53,4 +50,4 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
-} 
+}
