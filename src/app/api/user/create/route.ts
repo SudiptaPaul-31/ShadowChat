@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       },
     });
 
-    // Return only relevant user fields (exclude sensitive fields manually if needed..)
+    // Return only relevant user fields (exclude sensitive fields manually if needed)
     return NextResponse.json(user, { status: 201 });
 
   } catch (error: unknown) {
