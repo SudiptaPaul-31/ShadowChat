@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 
 
+
 export const metadata: Metadata = {
   title: "ShadowChat",
   description: "Privacy-focused, decentralized social network",
