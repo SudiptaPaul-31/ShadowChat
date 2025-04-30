@@ -1,4 +1,3 @@
-
 import { NextResponse } from 'next/server';
 import { PrismaClient, Prisma } from '@prisma/client';
 import { z, ZodError } from 'zod';
@@ -37,7 +36,9 @@ export async function POST(request: Request) {
       );
     }
 
-    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+    if (error instanceof Error && 
+        error.constructor.name === 'PrismaClientKnownRequestError' && 
+        (error as Prisma.PrismaClientKnownRequestError).code === 'P2002') {
       return NextResponse.json(
         { error: 'Username or wallet address already exists' },
         { status: 409 }
