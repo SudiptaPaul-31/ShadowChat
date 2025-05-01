@@ -15,55 +15,12 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  username      String    @unique
-  email         String    @unique
-  passwordHash  String
-  profilePicUrl String?
-  status        String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id            String   @id @default(uuid())
+  username      String   @unique
+  walletAddress String   @unique
+  avatar        String?  // Optional avatar URL
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  // Relations
-  groupsCreated Group[]   @relation("UserCreatedGroups")
-  groupMemberships GroupMember[]
-  messages      Message[]
-}
-
-model Group {
-  id            String    @id @default(cuid())
-  name          String
-  description   String?
-  creatorId     String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  // Relations
-  creator       User      @relation("UserCreatedGroups", fields: [creatorId], references: [id])
-  members       GroupMember[]
-  messages      Message[]
-}
-
-model GroupMember {
-  id        String   @id @default(cuid())
-  userId    String
-  groupId   String
-  joinedAt  DateTime @default(now())
-
-  user      User     @relation(fields: [userId], references: [id])
-  group     Group    @relation(fields: [groupId], references: [id])
-
-  @@unique([userId, groupId])
-}
-
-model Message {
-  id        String   @id @default(cuid())
-  content   String
-  sentAt    DateTime @default(now())
-
-  senderId  String
-  groupId   String
-
-  sender    User     @relation(fields: [senderId], references: [id])
-  group     Group    @relation(fields: [groupId], references: [id])
+  @@map("users") // Specifies the table name in the database
 }
