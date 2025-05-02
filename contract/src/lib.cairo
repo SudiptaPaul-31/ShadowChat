@@ -32,3 +32,22 @@ mod HelloStarknet {
 }
 
 pub mod message;
+
+// Define a new trait for the Profile System
+pub trait IProfileSystem<TContractState> {
+    fn set_profile(ref self: TContractState, username: felt252, name: felt252, profile_pic_url: felt252);
+    fn get_profile(self: @TContractState, username: felt252) -> (felt252, felt252);
+}
+
+// Implement the Profile System
+#[abi(embed_v0)]
+impl ProfileSystemImpl of IProfileSystem<ContractState> {
+    fn set_profile(ref self: ContractState, username: felt252, name: felt252, profile_pic_url: felt252) {
+        // Logic to set user profile
+    }
+
+    fn get_profile(self: @ContractState, username: felt252) -> (felt252, felt252) {
+        // Logic to get user profile
+        ("", "") // Placeholder return
+    }
+}
