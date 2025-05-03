@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model AnonymousUser
+ * 
+ */
+export type AnonymousUser = $Result.DefaultSelection<Prisma.$AnonymousUserPayload>
+/**
  * Model Group
  * 
  */
@@ -168,6 +173,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.anonymousUser`: Exposes CRUD operations for the **AnonymousUser** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AnonymousUsers
+    * const anonymousUsers = await prisma.anonymousUser.findMany()
+    * ```
+    */
+  get anonymousUser(): Prisma.AnonymousUserDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.group`: Exposes CRUD operations for the **Group** model.
@@ -639,6 +654,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    AnonymousUser: 'AnonymousUser',
     Group: 'Group',
     GroupMember: 'GroupMember',
     Message: 'Message'
@@ -660,7 +676,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "group" | "groupMember" | "message"
+      modelProps: "user" | "anonymousUser" | "group" | "groupMember" | "message"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -735,6 +751,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      AnonymousUser: {
+        payload: Prisma.$AnonymousUserPayload<ExtArgs>
+        fields: Prisma.AnonymousUserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AnonymousUserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AnonymousUserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          findFirst: {
+            args: Prisma.AnonymousUserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AnonymousUserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          findMany: {
+            args: Prisma.AnonymousUserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>[]
+          }
+          create: {
+            args: Prisma.AnonymousUserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          createMany: {
+            args: Prisma.AnonymousUserCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AnonymousUserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>[]
+          }
+          delete: {
+            args: Prisma.AnonymousUserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          update: {
+            args: Prisma.AnonymousUserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          deleteMany: {
+            args: Prisma.AnonymousUserDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AnonymousUserUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AnonymousUserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>[]
+          }
+          upsert: {
+            args: Prisma.AnonymousUserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          aggregate: {
+            args: Prisma.AnonymousUserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAnonymousUser>
+          }
+          groupBy: {
+            args: Prisma.AnonymousUserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AnonymousUserGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AnonymousUserCountArgs<ExtArgs>
+            result: $Utils.Optional<AnonymousUserCountAggregateOutputType> | number
           }
         }
       }
@@ -1045,6 +1135,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    anonymousUser?: AnonymousUserOmit
     group?: GroupOmit
     groupMember?: GroupMemberOmit
     message?: MessageOmit
@@ -2418,6 +2509,1014 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AnonymousUser
+   */
+
+  export type AggregateAnonymousUser = {
+    _count: AnonymousUserCountAggregateOutputType | null
+    _min: AnonymousUserMinAggregateOutputType | null
+    _max: AnonymousUserMaxAggregateOutputType | null
+  }
+
+  export type AnonymousUserMinAggregateOutputType = {
+    id: string | null
+    username: string | null
+    walletAddress: string | null
+    avatar: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AnonymousUserMaxAggregateOutputType = {
+    id: string | null
+    username: string | null
+    walletAddress: string | null
+    avatar: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AnonymousUserCountAggregateOutputType = {
+    id: number
+    username: number
+    walletAddress: number
+    avatar: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AnonymousUserMinAggregateInputType = {
+    id?: true
+    username?: true
+    walletAddress?: true
+    avatar?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AnonymousUserMaxAggregateInputType = {
+    id?: true
+    username?: true
+    walletAddress?: true
+    avatar?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AnonymousUserCountAggregateInputType = {
+    id?: true
+    username?: true
+    walletAddress?: true
+    avatar?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AnonymousUserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AnonymousUser to aggregate.
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnonymousUsers to fetch.
+     */
+    orderBy?: AnonymousUserOrderByWithRelationInput | AnonymousUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AnonymousUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnonymousUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnonymousUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AnonymousUsers
+    **/
+    _count?: true | AnonymousUserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AnonymousUserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AnonymousUserMaxAggregateInputType
+  }
+
+  export type GetAnonymousUserAggregateType<T extends AnonymousUserAggregateArgs> = {
+        [P in keyof T & keyof AggregateAnonymousUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAnonymousUser[P]>
+      : GetScalarType<T[P], AggregateAnonymousUser[P]>
+  }
+
+
+
+
+  export type AnonymousUserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnonymousUserWhereInput
+    orderBy?: AnonymousUserOrderByWithAggregationInput | AnonymousUserOrderByWithAggregationInput[]
+    by: AnonymousUserScalarFieldEnum[] | AnonymousUserScalarFieldEnum
+    having?: AnonymousUserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AnonymousUserCountAggregateInputType | true
+    _min?: AnonymousUserMinAggregateInputType
+    _max?: AnonymousUserMaxAggregateInputType
+  }
+
+  export type AnonymousUserGroupByOutputType = {
+    id: string
+    username: string
+    walletAddress: string
+    avatar: string
+    createdAt: Date
+    updatedAt: Date
+    _count: AnonymousUserCountAggregateOutputType | null
+    _min: AnonymousUserMinAggregateOutputType | null
+    _max: AnonymousUserMaxAggregateOutputType | null
+  }
+
+  type GetAnonymousUserGroupByPayload<T extends AnonymousUserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AnonymousUserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AnonymousUserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AnonymousUserGroupByOutputType[P]>
+            : GetScalarType<T[P], AnonymousUserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AnonymousUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    username?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["anonymousUser"]>
+
+  export type AnonymousUserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    username?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["anonymousUser"]>
+
+  export type AnonymousUserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    username?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["anonymousUser"]>
+
+  export type AnonymousUserSelectScalar = {
+    id?: boolean
+    username?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AnonymousUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "walletAddress" | "avatar" | "createdAt" | "updatedAt", ExtArgs["result"]["anonymousUser"]>
+
+  export type $AnonymousUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AnonymousUser"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      username: string
+      walletAddress: string
+      avatar: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["anonymousUser"]>
+    composites: {}
+  }
+
+  type AnonymousUserGetPayload<S extends boolean | null | undefined | AnonymousUserDefaultArgs> = $Result.GetResult<Prisma.$AnonymousUserPayload, S>
+
+  type AnonymousUserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AnonymousUserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AnonymousUserCountAggregateInputType | true
+    }
+
+  export interface AnonymousUserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AnonymousUser'], meta: { name: 'AnonymousUser' } }
+    /**
+     * Find zero or one AnonymousUser that matches the filter.
+     * @param {AnonymousUserFindUniqueArgs} args - Arguments to find a AnonymousUser
+     * @example
+     * // Get one AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AnonymousUserFindUniqueArgs>(args: SelectSubset<T, AnonymousUserFindUniqueArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AnonymousUser that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AnonymousUserFindUniqueOrThrowArgs} args - Arguments to find a AnonymousUser
+     * @example
+     * // Get one AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AnonymousUserFindUniqueOrThrowArgs>(args: SelectSubset<T, AnonymousUserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AnonymousUser that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserFindFirstArgs} args - Arguments to find a AnonymousUser
+     * @example
+     * // Get one AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AnonymousUserFindFirstArgs>(args?: SelectSubset<T, AnonymousUserFindFirstArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AnonymousUser that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserFindFirstOrThrowArgs} args - Arguments to find a AnonymousUser
+     * @example
+     * // Get one AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AnonymousUserFindFirstOrThrowArgs>(args?: SelectSubset<T, AnonymousUserFindFirstOrThrowArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AnonymousUsers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AnonymousUsers
+     * const anonymousUsers = await prisma.anonymousUser.findMany()
+     * 
+     * // Get first 10 AnonymousUsers
+     * const anonymousUsers = await prisma.anonymousUser.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const anonymousUserWithIdOnly = await prisma.anonymousUser.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AnonymousUserFindManyArgs>(args?: SelectSubset<T, AnonymousUserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AnonymousUser.
+     * @param {AnonymousUserCreateArgs} args - Arguments to create a AnonymousUser.
+     * @example
+     * // Create one AnonymousUser
+     * const AnonymousUser = await prisma.anonymousUser.create({
+     *   data: {
+     *     // ... data to create a AnonymousUser
+     *   }
+     * })
+     * 
+     */
+    create<T extends AnonymousUserCreateArgs>(args: SelectSubset<T, AnonymousUserCreateArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AnonymousUsers.
+     * @param {AnonymousUserCreateManyArgs} args - Arguments to create many AnonymousUsers.
+     * @example
+     * // Create many AnonymousUsers
+     * const anonymousUser = await prisma.anonymousUser.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AnonymousUserCreateManyArgs>(args?: SelectSubset<T, AnonymousUserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AnonymousUsers and returns the data saved in the database.
+     * @param {AnonymousUserCreateManyAndReturnArgs} args - Arguments to create many AnonymousUsers.
+     * @example
+     * // Create many AnonymousUsers
+     * const anonymousUser = await prisma.anonymousUser.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AnonymousUsers and only return the `id`
+     * const anonymousUserWithIdOnly = await prisma.anonymousUser.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AnonymousUserCreateManyAndReturnArgs>(args?: SelectSubset<T, AnonymousUserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AnonymousUser.
+     * @param {AnonymousUserDeleteArgs} args - Arguments to delete one AnonymousUser.
+     * @example
+     * // Delete one AnonymousUser
+     * const AnonymousUser = await prisma.anonymousUser.delete({
+     *   where: {
+     *     // ... filter to delete one AnonymousUser
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AnonymousUserDeleteArgs>(args: SelectSubset<T, AnonymousUserDeleteArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AnonymousUser.
+     * @param {AnonymousUserUpdateArgs} args - Arguments to update one AnonymousUser.
+     * @example
+     * // Update one AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AnonymousUserUpdateArgs>(args: SelectSubset<T, AnonymousUserUpdateArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AnonymousUsers.
+     * @param {AnonymousUserDeleteManyArgs} args - Arguments to filter AnonymousUsers to delete.
+     * @example
+     * // Delete a few AnonymousUsers
+     * const { count } = await prisma.anonymousUser.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AnonymousUserDeleteManyArgs>(args?: SelectSubset<T, AnonymousUserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AnonymousUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AnonymousUsers
+     * const anonymousUser = await prisma.anonymousUser.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AnonymousUserUpdateManyArgs>(args: SelectSubset<T, AnonymousUserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AnonymousUsers and returns the data updated in the database.
+     * @param {AnonymousUserUpdateManyAndReturnArgs} args - Arguments to update many AnonymousUsers.
+     * @example
+     * // Update many AnonymousUsers
+     * const anonymousUser = await prisma.anonymousUser.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AnonymousUsers and only return the `id`
+     * const anonymousUserWithIdOnly = await prisma.anonymousUser.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AnonymousUserUpdateManyAndReturnArgs>(args: SelectSubset<T, AnonymousUserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AnonymousUser.
+     * @param {AnonymousUserUpsertArgs} args - Arguments to update or create a AnonymousUser.
+     * @example
+     * // Update or create a AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.upsert({
+     *   create: {
+     *     // ... data to create a AnonymousUser
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AnonymousUser we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AnonymousUserUpsertArgs>(args: SelectSubset<T, AnonymousUserUpsertArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AnonymousUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserCountArgs} args - Arguments to filter AnonymousUsers to count.
+     * @example
+     * // Count the number of AnonymousUsers
+     * const count = await prisma.anonymousUser.count({
+     *   where: {
+     *     // ... the filter for the AnonymousUsers we want to count
+     *   }
+     * })
+    **/
+    count<T extends AnonymousUserCountArgs>(
+      args?: Subset<T, AnonymousUserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AnonymousUserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AnonymousUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AnonymousUserAggregateArgs>(args: Subset<T, AnonymousUserAggregateArgs>): Prisma.PrismaPromise<GetAnonymousUserAggregateType<T>>
+
+    /**
+     * Group by AnonymousUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AnonymousUserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AnonymousUserGroupByArgs['orderBy'] }
+        : { orderBy?: AnonymousUserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AnonymousUserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAnonymousUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AnonymousUser model
+   */
+  readonly fields: AnonymousUserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AnonymousUser.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AnonymousUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AnonymousUser model
+   */
+  interface AnonymousUserFieldRefs {
+    readonly id: FieldRef<"AnonymousUser", 'String'>
+    readonly username: FieldRef<"AnonymousUser", 'String'>
+    readonly walletAddress: FieldRef<"AnonymousUser", 'String'>
+    readonly avatar: FieldRef<"AnonymousUser", 'String'>
+    readonly createdAt: FieldRef<"AnonymousUser", 'DateTime'>
+    readonly updatedAt: FieldRef<"AnonymousUser", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AnonymousUser findUnique
+   */
+  export type AnonymousUserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Filter, which AnonymousUser to fetch.
+     */
+    where: AnonymousUserWhereUniqueInput
+  }
+
+  /**
+   * AnonymousUser findUniqueOrThrow
+   */
+  export type AnonymousUserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Filter, which AnonymousUser to fetch.
+     */
+    where: AnonymousUserWhereUniqueInput
+  }
+
+  /**
+   * AnonymousUser findFirst
+   */
+  export type AnonymousUserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Filter, which AnonymousUser to fetch.
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnonymousUsers to fetch.
+     */
+    orderBy?: AnonymousUserOrderByWithRelationInput | AnonymousUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AnonymousUsers.
+     */
+    cursor?: AnonymousUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnonymousUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnonymousUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AnonymousUsers.
+     */
+    distinct?: AnonymousUserScalarFieldEnum | AnonymousUserScalarFieldEnum[]
+  }
+
+  /**
+   * AnonymousUser findFirstOrThrow
+   */
+  export type AnonymousUserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Filter, which AnonymousUser to fetch.
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnonymousUsers to fetch.
+     */
+    orderBy?: AnonymousUserOrderByWithRelationInput | AnonymousUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AnonymousUsers.
+     */
+    cursor?: AnonymousUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnonymousUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnonymousUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AnonymousUsers.
+     */
+    distinct?: AnonymousUserScalarFieldEnum | AnonymousUserScalarFieldEnum[]
+  }
+
+  /**
+   * AnonymousUser findMany
+   */
+  export type AnonymousUserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Filter, which AnonymousUsers to fetch.
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnonymousUsers to fetch.
+     */
+    orderBy?: AnonymousUserOrderByWithRelationInput | AnonymousUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AnonymousUsers.
+     */
+    cursor?: AnonymousUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnonymousUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnonymousUsers.
+     */
+    skip?: number
+    distinct?: AnonymousUserScalarFieldEnum | AnonymousUserScalarFieldEnum[]
+  }
+
+  /**
+   * AnonymousUser create
+   */
+  export type AnonymousUserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * The data needed to create a AnonymousUser.
+     */
+    data: XOR<AnonymousUserCreateInput, AnonymousUserUncheckedCreateInput>
+  }
+
+  /**
+   * AnonymousUser createMany
+   */
+  export type AnonymousUserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AnonymousUsers.
+     */
+    data: AnonymousUserCreateManyInput | AnonymousUserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AnonymousUser createManyAndReturn
+   */
+  export type AnonymousUserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * The data used to create many AnonymousUsers.
+     */
+    data: AnonymousUserCreateManyInput | AnonymousUserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AnonymousUser update
+   */
+  export type AnonymousUserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * The data needed to update a AnonymousUser.
+     */
+    data: XOR<AnonymousUserUpdateInput, AnonymousUserUncheckedUpdateInput>
+    /**
+     * Choose, which AnonymousUser to update.
+     */
+    where: AnonymousUserWhereUniqueInput
+  }
+
+  /**
+   * AnonymousUser updateMany
+   */
+  export type AnonymousUserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AnonymousUsers.
+     */
+    data: XOR<AnonymousUserUpdateManyMutationInput, AnonymousUserUncheckedUpdateManyInput>
+    /**
+     * Filter which AnonymousUsers to update
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * Limit how many AnonymousUsers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnonymousUser updateManyAndReturn
+   */
+  export type AnonymousUserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * The data used to update AnonymousUsers.
+     */
+    data: XOR<AnonymousUserUpdateManyMutationInput, AnonymousUserUncheckedUpdateManyInput>
+    /**
+     * Filter which AnonymousUsers to update
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * Limit how many AnonymousUsers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnonymousUser upsert
+   */
+  export type AnonymousUserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * The filter to search for the AnonymousUser to update in case it exists.
+     */
+    where: AnonymousUserWhereUniqueInput
+    /**
+     * In case the AnonymousUser found by the `where` argument doesn't exist, create a new AnonymousUser with this data.
+     */
+    create: XOR<AnonymousUserCreateInput, AnonymousUserUncheckedCreateInput>
+    /**
+     * In case the AnonymousUser was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AnonymousUserUpdateInput, AnonymousUserUncheckedUpdateInput>
+  }
+
+  /**
+   * AnonymousUser delete
+   */
+  export type AnonymousUserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Filter which AnonymousUser to delete.
+     */
+    where: AnonymousUserWhereUniqueInput
+  }
+
+  /**
+   * AnonymousUser deleteMany
+   */
+  export type AnonymousUserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AnonymousUsers to delete
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * Limit how many AnonymousUsers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnonymousUser without action
+   */
+  export type AnonymousUserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
   }
 
 
@@ -5699,6 +6798,18 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const AnonymousUserScalarFieldEnum: {
+    id: 'id',
+    username: 'username',
+    walletAddress: 'walletAddress',
+    avatar: 'avatar',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AnonymousUserScalarFieldEnum = (typeof AnonymousUserScalarFieldEnum)[keyof typeof AnonymousUserScalarFieldEnum]
+
+
   export const GroupScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -5890,6 +7001,63 @@ export namespace Prisma {
     avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type AnonymousUserWhereInput = {
+    AND?: AnonymousUserWhereInput | AnonymousUserWhereInput[]
+    OR?: AnonymousUserWhereInput[]
+    NOT?: AnonymousUserWhereInput | AnonymousUserWhereInput[]
+    id?: StringFilter<"AnonymousUser"> | string
+    username?: StringFilter<"AnonymousUser"> | string
+    walletAddress?: StringFilter<"AnonymousUser"> | string
+    avatar?: StringFilter<"AnonymousUser"> | string
+    createdAt?: DateTimeFilter<"AnonymousUser"> | Date | string
+    updatedAt?: DateTimeFilter<"AnonymousUser"> | Date | string
+  }
+
+  export type AnonymousUserOrderByWithRelationInput = {
+    id?: SortOrder
+    username?: SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AnonymousUserWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    username?: string
+    walletAddress?: string
+    AND?: AnonymousUserWhereInput | AnonymousUserWhereInput[]
+    OR?: AnonymousUserWhereInput[]
+    NOT?: AnonymousUserWhereInput | AnonymousUserWhereInput[]
+    avatar?: StringFilter<"AnonymousUser"> | string
+    createdAt?: DateTimeFilter<"AnonymousUser"> | Date | string
+    updatedAt?: DateTimeFilter<"AnonymousUser"> | Date | string
+  }, "id" | "username" | "walletAddress">
+
+  export type AnonymousUserOrderByWithAggregationInput = {
+    id?: SortOrder
+    username?: SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AnonymousUserCountOrderByAggregateInput
+    _max?: AnonymousUserMaxOrderByAggregateInput
+    _min?: AnonymousUserMinOrderByAggregateInput
+  }
+
+  export type AnonymousUserScalarWhereWithAggregatesInput = {
+    AND?: AnonymousUserScalarWhereWithAggregatesInput | AnonymousUserScalarWhereWithAggregatesInput[]
+    OR?: AnonymousUserScalarWhereWithAggregatesInput[]
+    NOT?: AnonymousUserScalarWhereWithAggregatesInput | AnonymousUserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AnonymousUser"> | string
+    username?: StringWithAggregatesFilter<"AnonymousUser"> | string
+    walletAddress?: StringWithAggregatesFilter<"AnonymousUser"> | string
+    avatar?: StringWithAggregatesFilter<"AnonymousUser"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"AnonymousUser"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AnonymousUser"> | Date | string
   }
 
   export type GroupWhereInput = {
@@ -6169,6 +7337,69 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     walletAddress?: StringFieldUpdateOperationsInput | string
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnonymousUserCreateInput = {
+    id?: string
+    username: string
+    walletAddress: string
+    avatar: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnonymousUserUncheckedCreateInput = {
+    id?: string
+    username: string
+    walletAddress: string
+    avatar: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnonymousUserUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnonymousUserUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnonymousUserCreateManyInput = {
+    id?: string
+    username: string
+    walletAddress: string
+    avatar: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnonymousUserUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnonymousUserUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6507,6 +7738,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type AnonymousUserCountOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AnonymousUserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AnonymousUserMinOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserScalarRelationFilter = {
