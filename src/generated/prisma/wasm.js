@@ -130,6 +130,15 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AnonymousUserScalarFieldEnum = {
+  id: 'id',
+  username: 'username',
+  walletAddress: 'walletAddress',
+  avatar: 'avatar',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.GroupScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -172,6 +181,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  AnonymousUser: 'AnonymousUser',
   Group: 'Group',
   GroupMember: 'GroupMember',
   Message: 'Message'
