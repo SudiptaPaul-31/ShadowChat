@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@/generated/prisma';
+import { PrismaClient, Prisma } from '@/generated/prisma';
 
 const prisma = new PrismaClient();
 
@@ -34,19 +34,19 @@ export async function POST(request: Request) {
       { status: 201 }
     );
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error creating user:', error);
 
-    if (error.code === 'P2002') {
-      const field = error.meta?.target?.[0];
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+      const field = (error.meta?.target as string[])[0];  
       return NextResponse.json(
-        { 
-          success: false, 
-          message: `This ${field} is already registered` 
+        {
+          success: false,
+          message: `This ${field} is already registered`
         },
         { status: 409 }
       );
-    }
+    }    
 
     return NextResponse.json(
       { 
