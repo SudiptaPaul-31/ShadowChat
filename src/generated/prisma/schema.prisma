@@ -29,7 +29,7 @@ model User {
   // Relations
   groupsCreated    Group[]       @relation("UserCreatedGroups")
   groupMemberships GroupMember[]
-  messages         Message[]
+  messages         Message[] // messages sent
 }
 
 model Group {
