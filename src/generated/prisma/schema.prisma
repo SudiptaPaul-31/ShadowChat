@@ -21,13 +21,15 @@ model User {
   passwordHash  String
   profilePicUrl String?
   status        String?
+  walletAddress String   @unique
+  avatar        String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
   // Relations
-  groupsCreated    Group[]       @relation("UserCreatedGroups") // groups this user created
+  groupsCreated    Group[]       @relation("UserCreatedGroups")
   groupMemberships GroupMember[]
-  messages         Message[] // messages sent
+  messages         Message[]
 }
 
 model Group {
