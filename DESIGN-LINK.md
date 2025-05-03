@@ -1,0 +1,1 @@
+Here is a link to the figma design [here](https://www.figma.com/proto/lSxA5aiYuM0mP843CT743Y/ChatUi?page-id=0%3A1&node-id=7-11&viewport=704%2C243%2C0.87&t=K2SQYwD2TjVizLW9-1&scaling=scale-down-width&content-scaling=fixed)
