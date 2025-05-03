@@ -1247,6 +1247,8 @@ export namespace Prisma {
     passwordHash: string | null
     profilePicUrl: string | null
     status: string | null
+    walletAddress: string | null
+    avatar: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1258,6 +1260,8 @@ export namespace Prisma {
     passwordHash: string | null
     profilePicUrl: string | null
     status: string | null
+    walletAddress: string | null
+    avatar: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1269,6 +1273,8 @@ export namespace Prisma {
     passwordHash: number
     profilePicUrl: number
     status: number
+    walletAddress: number
+    avatar: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1282,6 +1288,8 @@ export namespace Prisma {
     passwordHash?: true
     profilePicUrl?: true
     status?: true
+    walletAddress?: true
+    avatar?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1293,6 +1301,8 @@ export namespace Prisma {
     passwordHash?: true
     profilePicUrl?: true
     status?: true
+    walletAddress?: true
+    avatar?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1304,6 +1314,8 @@ export namespace Prisma {
     passwordHash?: true
     profilePicUrl?: true
     status?: true
+    walletAddress?: true
+    avatar?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1388,6 +1400,8 @@ export namespace Prisma {
     passwordHash: string
     profilePicUrl: string | null
     status: string | null
+    walletAddress: string
+    avatar: string | null
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1416,6 +1430,8 @@ export namespace Prisma {
     passwordHash?: boolean
     profilePicUrl?: boolean
     status?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     groupsCreated?: boolean | User$groupsCreatedArgs<ExtArgs>
@@ -1431,6 +1447,8 @@ export namespace Prisma {
     passwordHash?: boolean
     profilePicUrl?: boolean
     status?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1442,6 +1460,8 @@ export namespace Prisma {
     passwordHash?: boolean
     profilePicUrl?: boolean
     status?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1453,11 +1473,13 @@ export namespace Prisma {
     passwordHash?: boolean
     profilePicUrl?: boolean
     status?: boolean
+    walletAddress?: boolean
+    avatar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "passwordHash" | "profilePicUrl" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "passwordHash" | "profilePicUrl" | "status" | "walletAddress" | "avatar" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     groupsCreated?: boolean | User$groupsCreatedArgs<ExtArgs>
     groupMemberships?: boolean | User$groupMembershipsArgs<ExtArgs>
@@ -1481,6 +1503,8 @@ export namespace Prisma {
       passwordHash: string
       profilePicUrl: string | null
       status: string | null
+      walletAddress: string
+      avatar: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -1915,6 +1939,8 @@ export namespace Prisma {
     readonly passwordHash: FieldRef<"User", 'String'>
     readonly profilePicUrl: FieldRef<"User", 'String'>
     readonly status: FieldRef<"User", 'String'>
+    readonly walletAddress: FieldRef<"User", 'String'>
+    readonly avatar: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -5664,6 +5690,8 @@ export namespace Prisma {
     passwordHash: 'passwordHash',
     profilePicUrl: 'profilePicUrl',
     status: 'status',
+    walletAddress: 'walletAddress',
+    avatar: 'avatar',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -5788,6 +5816,8 @@ export namespace Prisma {
     passwordHash?: StringFilter<"User"> | string
     profilePicUrl?: StringNullableFilter<"User"> | string | null
     status?: StringNullableFilter<"User"> | string | null
+    walletAddress?: StringFilter<"User"> | string
+    avatar?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     groupsCreated?: GroupListRelationFilter
@@ -5802,6 +5832,8 @@ export namespace Prisma {
     passwordHash?: SortOrder
     profilePicUrl?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     groupsCreated?: GroupOrderByRelationAggregateInput
@@ -5813,18 +5845,20 @@ export namespace Prisma {
     id?: string
     username?: string
     email?: string
+    walletAddress?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     passwordHash?: StringFilter<"User"> | string
     profilePicUrl?: StringNullableFilter<"User"> | string | null
     status?: StringNullableFilter<"User"> | string | null
+    avatar?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     groupsCreated?: GroupListRelationFilter
     groupMemberships?: GroupMemberListRelationFilter
     messages?: MessageListRelationFilter
-  }, "id" | "username" | "email">
+  }, "id" | "username" | "email" | "walletAddress">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -5833,6 +5867,8 @@ export namespace Prisma {
     passwordHash?: SortOrder
     profilePicUrl?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -5850,6 +5886,8 @@ export namespace Prisma {
     passwordHash?: StringWithAggregatesFilter<"User"> | string
     profilePicUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
     status?: StringNullableWithAggregatesFilter<"User"> | string | null
+    walletAddress?: StringWithAggregatesFilter<"User"> | string
+    avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -6039,6 +6077,8 @@ export namespace Prisma {
     passwordHash: string
     profilePicUrl?: string | null
     status?: string | null
+    walletAddress: string
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groupsCreated?: GroupCreateNestedManyWithoutCreatorInput
@@ -6053,6 +6093,8 @@ export namespace Prisma {
     passwordHash: string
     profilePicUrl?: string | null
     status?: string | null
+    walletAddress: string
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groupsCreated?: GroupUncheckedCreateNestedManyWithoutCreatorInput
@@ -6067,6 +6109,8 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groupsCreated?: GroupUpdateManyWithoutCreatorNestedInput
@@ -6081,6 +6125,8 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groupsCreated?: GroupUncheckedUpdateManyWithoutCreatorNestedInput
@@ -6095,6 +6141,8 @@ export namespace Prisma {
     passwordHash: string
     profilePicUrl?: string | null
     status?: string | null
+    walletAddress: string
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6106,6 +6154,8 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6117,6 +6167,8 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6375,6 +6427,8 @@ export namespace Prisma {
     passwordHash?: SortOrder
     profilePicUrl?: SortOrder
     status?: SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6386,6 +6440,8 @@ export namespace Prisma {
     passwordHash?: SortOrder
     profilePicUrl?: SortOrder
     status?: SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6397,6 +6453,8 @@ export namespace Prisma {
     passwordHash?: SortOrder
     profilePicUrl?: SortOrder
     status?: SortOrder
+    walletAddress?: SortOrder
+    avatar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7103,6 +7161,8 @@ export namespace Prisma {
     passwordHash: string
     profilePicUrl?: string | null
     status?: string | null
+    walletAddress: string
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groupMemberships?: GroupMemberCreateNestedManyWithoutUserInput
@@ -7116,6 +7176,8 @@ export namespace Prisma {
     passwordHash: string
     profilePicUrl?: string | null
     status?: string | null
+    walletAddress: string
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groupMemberships?: GroupMemberUncheckedCreateNestedManyWithoutUserInput
@@ -7191,6 +7253,8 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groupMemberships?: GroupMemberUpdateManyWithoutUserNestedInput
@@ -7204,6 +7268,8 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groupMemberships?: GroupMemberUncheckedUpdateManyWithoutUserNestedInput
@@ -7249,6 +7315,8 @@ export namespace Prisma {
     passwordHash: string
     profilePicUrl?: string | null
     status?: string | null
+    walletAddress: string
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groupsCreated?: GroupCreateNestedManyWithoutCreatorInput
@@ -7262,6 +7330,8 @@ export namespace Prisma {
     passwordHash: string
     profilePicUrl?: string | null
     status?: string | null
+    walletAddress: string
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groupsCreated?: GroupUncheckedCreateNestedManyWithoutCreatorInput
@@ -7316,6 +7386,8 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groupsCreated?: GroupUpdateManyWithoutCreatorNestedInput
@@ -7329,6 +7401,8 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groupsCreated?: GroupUncheckedUpdateManyWithoutCreatorNestedInput
@@ -7373,6 +7447,8 @@ export namespace Prisma {
     passwordHash: string
     profilePicUrl?: string | null
     status?: string | null
+    walletAddress: string
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groupsCreated?: GroupCreateNestedManyWithoutCreatorInput
@@ -7386,6 +7462,8 @@ export namespace Prisma {
     passwordHash: string
     profilePicUrl?: string | null
     status?: string | null
+    walletAddress: string
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groupsCreated?: GroupUncheckedCreateNestedManyWithoutCreatorInput
@@ -7440,6 +7518,8 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groupsCreated?: GroupUpdateManyWithoutCreatorNestedInput
@@ -7453,6 +7533,8 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     profilePicUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    walletAddress?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groupsCreated?: GroupUncheckedUpdateManyWithoutCreatorNestedInput

@@ -21,6 +21,8 @@ model User {
   passwordHash  String
   profilePicUrl String?
   status        String?
+  walletAddress String    @unique
+  avatar        String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
