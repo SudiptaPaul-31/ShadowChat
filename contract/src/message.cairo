@@ -14,12 +14,7 @@ pub trait IMessageStorage<TContractState> {
 pub mod MessageStorage {
     use starknet::ContractAddress;
     use starknet::storage::{
-        Map,  
-        StoragePointerReadAccess,
-        StoragePathEntry, 
-        MutableVecTrait, 
-        Vec, 
-        VecTrait
+        Map, StorageMapReadAccess, StorageMapWriteAccess
     };
     use core::array::{Array, ArrayTrait};
     use super::IMessageStorage;
@@ -27,7 +22,8 @@ pub mod MessageStorage {
     // Define storage variables
     #[storage]
     struct Storage {
-        messages: Map::<ContractAddress, Vec<ByteArray>>,
+        messages: Map::<(ContractAddress, u64), ByteArray>,
+        message_counter: Map::<ContractAddress, u64>,
     }
 
     // Implement the contract interface
@@ -38,58 +34,43 @@ pub mod MessageStorage {
             // Check if message is empty
             assert(message.len() != 0, 'Message cannot be empty');
             
-            let recipient_messages = self.messages.entry(recipient);
-
-            // Append the message to the recipient's message vector
-            recipient_messages.push(message);
-
-            // Update the storage with the new message vector
-            // self.messages.entry(recipient).write(recipient_messages);
+            // Get the current counter for the recipient
+            let current_index = self.message_counter.read(recipient);
+            
+            // Store the message
+            self.messages.write((recipient, current_index), message);
+            
+            // Increment the counter
+            self.message_counter.write(recipient, current_index + 1);
         }
 
         // Get a specific message
         fn get_message(self: @ContractState, recipient: ContractAddress, index: u64) -> ByteArray {
-            let recipient_messages = self.messages.entry(recipient);
-
-            recipient_messages.at(index).read()
+            // Check if the index is valid
+            let total_messages = self.message_counter.read(recipient);
+            assert(index < total_messages, 'Index out of bounds');
+            
+            // Return the message
+            self.messages.read((recipient, index))
         }
 
         // Get all messages for a recipient
         fn get_all_messages(self: @ContractState, recipient: ContractAddress) -> Array<ByteArray> {
-            // Retrieve the messages for the recipient
-            let recipient_messages = self.messages.entry(recipient);
-
+            // Get the total number of messages for the recipient
+            let total_messages = self.message_counter.read(recipient);
+            
             // Create a new array to store the messages
             let mut messages: Array<ByteArray> = ArrayTrait::new();
-
+            
             // Iterate through the recipient's messages and append them to the array
-            let mut i = 0;
-            while i != recipient_messages.len() {
-                messages.append(recipient_messages.at(i).read());
+            let mut i: u64 = 0;
+            while i < total_messages {
+                messages.append(self.messages.read((recipient, i)));
                 i += 1;
             };
-
+            
             // Return the array of messages
             messages
         }
-    }
-}
-
-// Define a new trait for the Profile System
-pub trait IProfileSystem<TContractState> {
-    fn set_profile(ref self: TContractState, username: felt252, name: felt252, profile_pic_url: felt252);
-    fn get_profile(self: @TContractState, username: felt252) -> (felt252, felt252);
-}
-
-// Implement the Profile System
-#[abi(embed_v0)]
-impl ProfileSystemImpl of IProfileSystem<ContractState> {
-    fn set_profile(ref self: ContractState, username: felt252, name: felt252, profile_pic_url: felt252) {
-        // Logic to set user profile
-    }
-
-    fn get_profile(self: @ContractState, username: felt252) -> (felt252, felt252) {
-        // Logic to get user profile
-        ("", "") // Placeholder return
     }
 }
