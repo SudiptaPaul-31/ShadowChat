@@ -191,12 +191,9 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-<<<<<<< Updated upstream
     "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
-=======
     "rootEnvPath": null
->>>>>>> Stashed changes
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.7.0",
@@ -205,11 +202,8 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-<<<<<<< Updated upstream
   "postinstall": false,
-=======
   "postinstall": true,
->>>>>>> Stashed changes
   "inlineDatasources": {
     "db": {
       "url": {
