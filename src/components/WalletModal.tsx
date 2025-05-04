@@ -66,7 +66,7 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
             className="w-full bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
             size="lg"
             onClick={() =>
-              handleConnect({ modalMode: "neverAsk", include: ["braavos"] })
+              handleConnect({ modalMode: "alwaysAsk", include: ["braavos"] })
             }
           >
             <Image
@@ -83,7 +83,7 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
             className="w-full bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
             size="lg"
             onClick={() =>
-              handleConnect({ modalMode: "neverAsk", include: ["argentX"] })
+              handleConnect({ modalMode: "alwaysAsk", include: ["argentX"] })
             }
           >
             <Image
