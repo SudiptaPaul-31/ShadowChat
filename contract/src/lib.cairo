@@ -32,25 +32,37 @@ mod HelloStarknet {
 }
 
 pub mod message;
+pub mod media;
 
-// // Define a new trait for the Profile System
-// pub trait IProfileSystem<TContractState> {
-//     fn set_profile(
-//         ref self: TContractState, username: felt252, name: felt252, profile_pic_url: felt252,
-//     );
-//     fn get_profile(self: @TContractState, username: felt252) -> (felt252, felt252);
-// }
+// Interface for the Profile System is defined in a separate module
+#[starknet::interface]
+pub trait IProfileSystem<TContractState> {
+    fn set_profile(ref self: TContractState, username: felt252, name: felt252, profile_pic_url: felt252);
+    fn get_profile(self: @TContractState, username: felt252) -> (felt252, felt252);
+}
 
-// // Implement the Profile System
-// #[abi(embed_v0)]
-// impl ProfileSystemImpl of IProfileSystem<ContractState> {
-//     fn set_profile(
-//         ref self: ContractState, username: felt252, name: felt252, profile_pic_url: felt252,
-//     ) { // Logic to set user profile
-//     }
+// Profile System contract implementation
+#[starknet::contract]
+mod ProfileSystem {
+    use starknet::storage::{
+        Map, StorageMapReadAccess, StorageMapWriteAccess
+    };
 
-//     fn get_profile(self: @ContractState, username: felt252) -> (felt252, felt252) {
-//         // Logic to get user profile
-//         ("", "") // Placeholder return
-//     }
-// }
+    #[storage]
+    struct Storage {
+        profiles: Map::<felt252, (felt252, felt252)>,
+    }
+
+    #[abi(embed_v0)]
+    impl ProfileSystemImpl of super::IProfileSystem<ContractState> {
+        fn set_profile(ref self: ContractState, username: felt252, name: felt252, profile_pic_url: felt252) {
+            // Store the profile information
+            self.profiles.write(username, (name, profile_pic_url));
+        }
+
+        fn get_profile(self: @ContractState, username: felt252) -> (felt252, felt252) {
+            // Retrieve the profile information
+            self.profiles.read(username)
+        }
+    }
+}
