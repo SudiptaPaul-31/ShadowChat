@@ -1,13 +1,11 @@
 use contract::message::{
-    IMessageStorageDispatcher, 
-    IMessageStorageDispatcherTrait,
-    IMessageStorageSafeDispatcher,
+    IMessageStorageDispatcher, IMessageStorageDispatcherTrait, IMessageStorageSafeDispatcher,
     IMessageStorageSafeDispatcherTrait,
 };
-use snforge_std::{ declare, ContractClassTrait, DeclareResultTrait };
-use starknet::ContractAddress;
 use core::array::ArrayTrait;
 use core::traits::TryInto;
+use snforge_std::{ContractClassTrait, DeclareResultTrait, declare};
+use starknet::ContractAddress;
 
 // Define a helper function to deploy the contract
 fn deploy_contract() -> (IMessageStorageDispatcher, IMessageStorageSafeDispatcher) {
@@ -17,7 +15,7 @@ fn deploy_contract() -> (IMessageStorageDispatcher, IMessageStorageSafeDispatche
 
     let message_storage_dispatcher = IMessageStorageDispatcher { contract_address };
     let message_storage_safe_dispatcher = IMessageStorageSafeDispatcher { contract_address };
-    
+
     (message_storage_dispatcher, message_storage_safe_dispatcher)
 }
 
@@ -83,7 +81,28 @@ fn test_safe_panic_cannot_store_empty_message() {
 
     match result {
         Result::Ok(_) => core::panic_with_felt252('Should have panicked'),
-        Result::Err(panic_data) => assert(*panic_data.at(0) == 'Message cannot be empty', *panic_data.at(0)),
-        
+        Result::Err(panic_data) => assert(
+            *panic_data.at(0) == 'Message cannot be empty', *panic_data.at(0),
+        ),
     }
+}
+
+#[test]
+fn test_message_edit_message_success() {
+    let (dispatcher, _) = deploy_contract();
+    let recipient: ContractAddress = 'recipient'.try_into().unwrap();
+    let test_message = "Test Message";
+    let edit = "Edited Message";
+
+    for _ in 0..4_u32 {
+        dispatcher.store_message(recipient, test_message.clone());
+    }
+    let index = 2;
+    let message = dispatcher.get_message(recipient, index);
+    assert(message == test_message, 'STORAGE FAILED');
+
+    // edit message at index
+    dispatcher.edit_message(recipient, index, edit.clone());
+    let message = dispatcher.get_message(recipient, index);
+    assert(message == edit, 'EDIT FAILED');
 }
