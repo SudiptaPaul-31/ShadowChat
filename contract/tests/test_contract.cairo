@@ -45,6 +45,23 @@ fn test_cannot_increase_balance_with_zero_value() {
         },
     };
 }
+// #[test]
+// fn test_set_and_get_profile() {
+//     let contract_address = deploy_contract("ProfileSystem");
+
+//     let dispatcher = IProfileSystemDispatcher { contract_address };
+
+//     // Set a profile
+//     dispatcher.set_profile("user1", "John Doe", "http://example.com/johndoe.jpg");
+
+//     // Retrieve the profile
+//     let (name, profile_pic_url) = dispatcher.get_profile("user1");
+
+//     // Assert that the retrieved profile matches the set values
+//     assert(name == "John Doe", 'Name should match');
+//     assert(profile_pic_url == "http://example.com/johndoe.jpg", 'Profile picture URL should
+//     match');
+// }
 
 #[test]
 fn test_set_and_get_profile() {
