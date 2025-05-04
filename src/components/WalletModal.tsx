@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import {
@@ -10,6 +10,12 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import {
+  connect,
+  disconnect,
+  type ConnectOptions,
+  type DisconnectOptions,
+} from "@starknet-io/get-starknet";
 
 interface WalletModalProps {
   isOpen: boolean;
@@ -17,6 +23,34 @@ interface WalletModalProps {
 }
 
 const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
+  const [walletName, setWalletName] = useState("");
+
+  const handleConnect = async (options?: ConnectOptions) => {
+    try {
+      const wallet = await connect(options);
+      if (wallet) {
+        setWalletName(wallet.name || "");
+
+        onOpenChange(false);
+      } else {
+        alert("No wallet selected.");
+      }
+    } catch (error) {
+      console.error("Connection failed:", error);
+      alert("Failed to connect to wallet.");
+    }
+  };
+
+  const handleDisconnect = async (options?: DisconnectOptions) => {
+    try {
+      await disconnect(options);
+      setWalletName("");
+      alert("Disconnected successfully.");
+    } catch (err) {
+      console.error("Disconnection failed:", err);
+    }
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
@@ -26,14 +60,14 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
             Choose your preferred wallet to connect
           </DialogDescription>
         </DialogHeader>
+
         <div className="space-y-4 pt-4">
           <Button
             className="w-full bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
             size="lg"
-            onClick={() => {
-              alert("Bravos wallet connection mocked!");
-              onOpenChange(false);
-            }}
+            onClick={() =>
+              handleConnect({ modalMode: "neverAsk", include: ["braavos"] })
+            }
           >
             <Image
               src="/bravos.webp"
@@ -48,10 +82,9 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
           <Button
             className="w-full bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
             size="lg"
-            onClick={() => {
-              alert("Argent wallet connection mocked!");
-              onOpenChange(false);
-            }}
+            onClick={() =>
+              handleConnect({ modalMode: "neverAsk", include: ["argentX"] })
+            }
           >
             <Image
               src="/argent.png"
@@ -62,7 +95,22 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
             />
             Connect with Argent
           </Button>
+
+          <Button
+            className="w-full"
+            variant="outline"
+            size="lg"
+            onClick={() => handleDisconnect()}
+          >
+            Disconnect
+          </Button>
         </div>
+
+        {walletName && (
+          <div className="text-center pt-4 text-sm text-green-500">
+            Connected: {walletName}
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );
