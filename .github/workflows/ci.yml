@@ -27,14 +27,13 @@ jobs:
           sudo apt-get install -y clang libgmp-dev
 
       - name: Build contracts
-        run: |
-          cd working-directory: ./contract
-          scarb build
+        working-directory: ./contract
+        run: scarb build
 
       - name: Run tests
-        run: |
-          cd working-directory: ./contract
-          scarb test
+
+        working-directory: ./contract
+        run: scarb test
 
       - name: Check linting
         run: scarb fmt --check
