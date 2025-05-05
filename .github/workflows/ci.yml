@@ -18,7 +18,7 @@ jobs:
 
       - name: Set up Scarb
         run: |
-          curl -L -o scarb.tar.gz https://github.com/software-mansion/scarb/releases/download/v0.7.0/scarb-x86_64-unknown-linux-gnu.tar.gz
+          curl -L https://github.com/software-mansion/scarb/releases/latest/download/scarb-x86_64-unknown-linux-gnu.tar.gz | tar -xz -C /usr/local/bin
           tar -xzf scarb.tar.gz
           sudo mv scarb /usr/local/bin
           scarb --version
