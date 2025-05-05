@@ -18,7 +18,7 @@ pub mod MessageStorage {
     use starknet::ContractAddress;
     use starknet::storage::{
         Map, MutableVecTrait, StoragePathEntry, StoragePointerReadAccess, Vec, VecTrait,
-        Map, StorageMapReadAccess, StorageMapWriteAccess
+        StorageMapReadAccess, StorageMapWriteAccess,
     };
     use super::IMessageStorage;
 
@@ -26,8 +26,7 @@ pub mod MessageStorage {
     #[storage]
     struct Storage {
         messages: Map<ContractAddress, Vec<ByteArray>>,
-        messages: Map::<(ContractAddress, u64), ByteArray>,
-        message_counter: Map::<ContractAddress, u64>,
+        message_counter: Map<ContractAddress, u64>,
     }
 
     // Implement the contract interface
@@ -42,8 +41,6 @@ pub mod MessageStorage {
 
             // Append the message to the recipient's message vector
             recipient_messages.push(message);
-            // Update the storage with the new message vector
-        // self.messages.entry(recipient).write(recipient_messages);
             
             // Get the current counter for the recipient
             let current_index = self.message_counter.read(recipient);
@@ -79,8 +76,6 @@ pub mod MessageStorage {
                 messages.append(self.messages.read((recipient, i)));
                 i += 1;
             }
-
-            };
             
             // Return the array of messages
             messages
@@ -115,7 +110,8 @@ pub mod MessageStorage {
         fn delete_all_messages(ref self: ContractState, recipient: ContractAddress) {
             let recipient_messages = self.messages.entry(recipient);
 
-            while let Option::Some(_) = recipient_messages.pop() {// Continue popping until all messages are deleted
+            while let Option::Some(_) = recipient_messages.pop() {
+                // Continue popping until all messages are deleted
             }
         }
     }
@@ -141,19 +137,19 @@ pub mod ProfileSystem {
     // Define storage variables
     #[storage]
     struct Storage {
-        messages: Map<ContractAddress, Vec<ByteArray>>,
+        profiles: Map<felt252, (felt252, felt252)>,
     }
+
     #[abi(embed_v0)]
     impl ProfileSystemImpl of IProfileSystem<ContractState> {
         fn set_profile(
             ref self: ContractState, username: felt252, name: felt252, profile_pic_url: felt252,
-        ) { // Logic to set user profile
+        ) {
+            self.profiles.write(username, (name, profile_pic_url));
         }
 
         fn get_profile(self: @ContractState, username: felt252) -> (felt252, felt252) {
-            // Logic to get user profile
-            ('', '') // Placeholder return
+            self.profiles.read(username)
         }
     }
-}
 }

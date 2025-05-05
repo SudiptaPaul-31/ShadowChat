@@ -1,13 +1,13 @@
-import Image from 'next/image'
-import { buttonVariants } from '@/components/ui/button'
-import { House } from 'lucide-react'
-import logo from './../../logos/logo.png'
-import Link from 'next/link'
+import Image from "next/image";
+import { buttonVariants } from "@/components/ui/button";
+import { House } from "lucide-react";
+import logo from "./../../logos/logo.png";
+import Link from "next/link";
 
 export default function Custom404() {
   return (
     <section className="bg-[url(/images/bg-404.jpg)] relative flex flex-col justify-center min-h-screen  bg-center bg-no-repeat bg-cover">
-      <div className="absolute z-0 inset-0 bg-black/65"></div>
+      <div className="absolute z-0 inset-0 bg-black/65" />
 
       <div className="z-10">
         <div className="flex flex-col items-center justify-center text-center px-4">
@@ -32,12 +32,12 @@ export default function Custom404() {
               Don&apos;t worry, let&apos;s get you back on track!
             </p>
 
-            <Link href="/" className={buttonVariants({ variant: 'gradient' })}>
+            <Link href="/" className={buttonVariants({ variant: "gradient" })}>
               Back To Homepage <House />
             </Link>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
