@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Scarb
+        run: |
+          curl -L -o scarb.tar.gz https://github.com/software-mansion/scarb/releases/download/v0.7.0/scarb-x86_64-unknown-linux-gnu.tar.gz
+          tar -xzf scarb.tar.gz
+          sudo mv scarb /usr/local/bin
+          scarb --version
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang libgmp-dev
+
+      - name: Build contracts
+        run: scarb build
+
+      - name: Run tests
+        run: scarb test
+
+      - name: Check linting
+        run: scarb fmt --check
