@@ -2,8 +2,12 @@ use contract::{
     IHelloStarknetDispatcher, IHelloStarknetDispatcherTrait, IHelloStarknetSafeDispatcher,
     IHelloStarknetSafeDispatcherTrait,
 };
+use contract::{
+    IProfileSystemDispatcher, IProfileSystemDispatcherTrait
+};
 use snforge_std::{ContractClassTrait, DeclareResultTrait, declare};
 use starknet::ContractAddress;
+use core::array::ArrayTrait;
 
 fn deploy_contract(name: ByteArray) -> ContractAddress {
     let contract = declare(name).unwrap().contract_class();
@@ -14,7 +18,6 @@ fn deploy_contract(name: ByteArray) -> ContractAddress {
 #[test]
 fn test_increase_balance() {
     let contract_address = deploy_contract("HelloStarknet");
-
     let dispatcher = IHelloStarknetDispatcher { contract_address };
 
     let balance_before = dispatcher.get_balance();
@@ -30,7 +33,6 @@ fn test_increase_balance() {
 #[feature("safe_dispatcher")]
 fn test_cannot_increase_balance_with_zero_value() {
     let contract_address = deploy_contract("HelloStarknet");
-
     let safe_dispatcher = IHelloStarknetSafeDispatcher { contract_address };
 
     let balance_before = safe_dispatcher.get_balance().unwrap();
@@ -43,20 +45,36 @@ fn test_cannot_increase_balance_with_zero_value() {
         },
     };
 }
+// #[test]
+// fn test_set_and_get_profile() {
+//     let contract_address = deploy_contract("ProfileSystem");
+
+//     let dispatcher = IProfileSystemDispatcher { contract_address };
+
+//     // Set a profile
+//     dispatcher.set_profile("user1", "John Doe", "http://example.com/johndoe.jpg");
+
+//     // Retrieve the profile
+//     let (name, profile_pic_url) = dispatcher.get_profile("user1");
+
+//     // Assert that the retrieved profile matches the set values
+//     assert(name == "John Doe", 'Name should match');
+//     assert(profile_pic_url == "http://example.com/johndoe.jpg", 'Profile picture URL should
+//     match');
+// }
 
 #[test]
 fn test_set_and_get_profile() {
     let contract_address = deploy_contract("ProfileSystem");
-
     let dispatcher = IProfileSystemDispatcher { contract_address };
 
-    // Set a profile
-    dispatcher.set_profile("user1", "John Doe", "http://example.com/johndoe.jpg");
+    // Set a profile - using shorter URL to fit in felt252
+    dispatcher.set_profile('user1', 'John Doe', 'example.com/profile.jpg');
 
     // Retrieve the profile
-    let (name, profile_pic_url) = dispatcher.get_profile("user1");
+    let (name, profile_pic_url) = dispatcher.get_profile('user1');
 
     // Assert that the retrieved profile matches the set values
-    assert(name == "John Doe", 'Name should match');
-    assert(profile_pic_url == "http://example.com/johndoe.jpg", 'Profile picture URL should match');
+    assert(name == 'John Doe', 'Name should match');
+    assert(profile_pic_url == 'example.com/profile.jpg', 'URL should match');
 }
