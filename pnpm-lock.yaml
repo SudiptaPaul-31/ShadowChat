@@ -66,7 +66,7 @@ importers:
       '@eslint/eslintrc':
         specifier: ^3
         version: 3.3.1
-      '@next/swc-win32-x64-msvc':
+      '@next/swc-darwin-x64':
         specifier: ^15.4.0
         version: 15.4.0
       '@tailwindcss/postcss':
@@ -459,6 +459,12 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+  '@next/swc-darwin-x64@15.4.0':
+    resolution: {integrity: sha512-zsFozes7iXAkfQYQGYi9xiDKrS7mjLCMl9DIZfm0cEmilYmJrO16rn04H4Y+NJZ5kBxJUXn+hAy4kXmToZYFHA==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
+
   '@next/swc-linux-arm64-gnu@15.2.1':
     resolution: {integrity: sha512-gXDX5lIboebbjhiMT6kFgu4svQyjoSed6dHyjx5uZsjlvTwOAnZpn13w9XDaIMFFHw7K8CpBK7HfDKw0VZvUXQ==}
     engines: {node: '>= 10'}
@@ -491,12 +497,6 @@ packages:
 
   '@next/swc-win32-x64-msvc@15.2.1':
     resolution: {integrity: sha512-YjqXCl8QGhVlMR8uBftWk0iTmvtntr41PhG1kvzGp0sUP/5ehTM+cwx25hKE54J0CRnHYjSGjSH3gkHEaHIN9g==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [win32]
-
-  '@next/swc-win32-x64-msvc@15.4.0':
-    resolution: {integrity: sha512-IldilrY7yfSlqOpTha7I7rYDDkyCC/KIMCjo2Nf0WqTLw3B5ha4islIF07YjNRbZS1Xl5WMqo9zZtx7VAE4epg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -2968,6 +2968,8 @@ snapshots:
   '@next/swc-darwin-x64@15.2.1':
     optional: true
 
+  '@next/swc-darwin-x64@15.4.0': {}
+
   '@next/swc-linux-arm64-gnu@15.2.1':
     optional: true
 
@@ -2985,8 +2987,6 @@ snapshots:
 
   '@next/swc-win32-x64-msvc@15.2.1':
     optional: true
-
-  '@next/swc-win32-x64-msvc@15.4.0': {}
 
   '@noble/curves@1.7.0':
     dependencies:
