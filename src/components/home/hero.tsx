@@ -1,6 +1,6 @@
 import React from "react";
-import { ChevronRight, Shield, Users, Lock, MessageSquare } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ChevronRight, Shield, Users, Lock, MessageSquare } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   return (
