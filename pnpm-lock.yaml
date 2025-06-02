@@ -462,7 +462,6 @@ packages:
   '@next/swc-darwin-x64@15.4.0':
     resolution: {integrity: sha512-zsFozes7iXAkfQYQGYi9xiDKrS7mjLCMl9DIZfm0cEmilYmJrO16rn04H4Y+NJZ5kBxJUXn+hAy4kXmToZYFHA==}
     engines: {node: '>= 10'}
-    cpu: [x64]
     os: [darwin]
 
   '@next/swc-linux-arm64-gnu@15.2.1':
