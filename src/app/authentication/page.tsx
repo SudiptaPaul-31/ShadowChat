@@ -37,7 +37,7 @@ export default function Authentication() {
             <Wallet className="mr-2 h-5 w-5" />
             Connect Wallet
           </Button>
-          <WalletModal 
+          <WalletModal
             isOpen={isModalOpen}
             onOpenChange={setIsModalOpen}
           />
