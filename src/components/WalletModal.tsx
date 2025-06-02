@@ -16,6 +16,7 @@ import {
   type ConnectOptions,
   type DisconnectOptions,
 } from "@starknet-io/get-starknet";
+import { useRouter } from "next/navigation";
 
 interface WalletModalProps {
   isOpen: boolean;
@@ -24,12 +25,15 @@ interface WalletModalProps {
 
 const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
   const [walletName, setWalletName] = useState("");
+  const router = useRouter()
 
   const handleConnect = async (options?: ConnectOptions) => {
+    onOpenChange(false)
     try {
       const wallet = await connect(options);
       if (wallet) {
         setWalletName(wallet.name || "");
+        router.push("/");
 
         onOpenChange(false);
       } else {
@@ -66,7 +70,7 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
             className="w-full bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
             size="lg"
             onClick={() =>
-              handleConnect({ modalMode: "alwaysAsk", include: ["braavos"] })
+              handleConnect({ include: ["braavos"] })
             }
           >
             <Image
@@ -83,7 +87,7 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
             className="w-full bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
             size="lg"
             onClick={() =>
-              handleConnect({ modalMode: "alwaysAsk", include: ["argentX"] })
+              handleConnect({ include: ["argentX"] })
             }
           >
             <Image
