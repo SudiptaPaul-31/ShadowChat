@@ -17,6 +17,7 @@ import {
   type DisconnectOptions,
 } from "@starknet-io/get-starknet";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/toast";
 
 interface WalletModalProps {
   isOpen: boolean;
@@ -25,23 +26,30 @@ interface WalletModalProps {
 
 const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
   const [walletName, setWalletName] = useState("");
-  const router = useRouter()
+  const router = useRouter();
+  const { toast, dismiss } = useToast();
 
   const handleConnect = async (options?: ConnectOptions) => {
-    onOpenChange(false)
+    onOpenChange(false);
+    
+    const loadingToastId = toast.loading("Connecting to wallet...");
+    
     try {
       const wallet = await connect(options);
       if (wallet) {
         setWalletName(wallet.name || "");
+        dismiss(loadingToastId);
+        toast.success(`Successfully connected to ${wallet.name || 'wallet'}!`);
         router.push("/");
-
         onOpenChange(false);
       } else {
-        alert("No wallet selected.");
+        dismiss(loadingToastId);
+        toast.error("No wallet selected. Please try again.");
       }
     } catch (error) {
       console.error("Connection failed:", error);
-      alert("Failed to connect to wallet.");
+      dismiss(loadingToastId);
+      toast.error("Failed to connect to wallet. Please try again.");
     }
   };
 
@@ -49,9 +57,10 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
     try {
       await disconnect(options);
       setWalletName("");
-      alert("Disconnected successfully.");
+      toast.success("Wallet disconnected successfully!");
     } catch (err) {
       console.error("Disconnection failed:", err);
+      toast.error("Failed to disconnect wallet. Please try again.");
     }
   };
 
