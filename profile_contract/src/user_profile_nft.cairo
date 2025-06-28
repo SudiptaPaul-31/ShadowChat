@@ -7,16 +7,16 @@
 #[starknet::contract]
 mod UserProfileNFT {
     // Import required components from OpenZeppelin
+    use array::ArrayTrait;
+    use box::BoxTrait;
     use openzeppelin::access::ownable::OwnableComponent;
     use openzeppelin::introspection::src5::SRC5Component;
     use openzeppelin::token::erc1155::{ERC1155Component, ERC1155HooksEmptyImpl};
-    use openzeppelin::upgrades::interface::IUpgradeable;
     use openzeppelin::upgrades::UpgradeableComponent;
-    use starknet::{ClassHash, ContractAddress, get_caller_address};
-    use array::ArrayTrait;
-    use box::BoxTrait;
-    use zeroable::Zeroable;
+    use openzeppelin::upgrades::interface::IUpgradeable;
     use option::OptionTrait;
+    use starknet::{ClassHash, ContractAddress, get_caller_address};
+    use zeroable::Zeroable;
 
     // Define component structure for each OpenZeppelin component we'll use
     component!(path: ERC1155Component, storage: erc1155, event: ERC1155Event);
@@ -56,12 +56,11 @@ mod UserProfileNFT {
         ownable: OwnableComponent::Storage,
         #[substorage(v0)]
         upgradeable: UpgradeableComponent::Storage,
-        
         // Custom storage variables for user profiles
         profiles: LegacyMap<u256, UserProfile>, // Map token ID to profile
         address_to_token_id: LegacyMap<ContractAddress, u256>, // Map address to token ID
         token_id_counter: u256, // Counter for token IDs
-        has_profile: LegacyMap<ContractAddress, bool>, // Whether an address has a profile
+        has_profile: LegacyMap<ContractAddress, bool> // Whether an address has a profile
     }
 
     // Events definition
@@ -76,7 +75,6 @@ mod UserProfileNFT {
         OwnableEvent: OwnableComponent::Event,
         #[flat]
         UpgradeableEvent: UpgradeableComponent::Event,
-        
         // Custom events for profile management
         ProfileCreated: ProfileCreated,
         ProfileUpdated: ProfileUpdated,
@@ -105,10 +103,10 @@ mod UserProfileNFT {
     fn constructor(ref self: ContractState, owner: ContractAddress, base_uri: ByteArray) {
         // Initialize ERC1155 with base URI
         self.erc1155.initializer(base_uri);
-        
+
         // Initialize Ownable component with the specified owner
         self.ownable.initializer(owner);
-        
+
         // Initialize token ID counter
         self.token_id_counter.write(1);
     }
@@ -130,27 +128,25 @@ mod UserProfileNFT {
         fn setBaseUri(ref self: ContractState, baseUri: ByteArray) {
             self.set_base_uri(baseUri);
         }
-        
+
         // Create a new user profile and mint an ERC1155 token for it
         #[external(v0)]
         fn create_profile(
-            ref self: ContractState, 
-            username: ByteArray, 
-            ipfs_hash: ByteArray
+            ref self: ContractState, username: ByteArray, ipfs_hash: ByteArray,
         ) -> u256 {
             // Get caller address (the user creating the profile)
             let caller = get_caller_address();
-            
+
             // Check if user already has a profile
             assert(!self.has_profile.read(caller), 'User already has a profile');
-            
+
             // Get current token ID and increment counter
             let token_id = self.token_id_counter.read();
             self.token_id_counter.write(token_id + 1);
-            
+
             // Get current timestamp
             let timestamp = starknet::get_block_timestamp();
-            
+
             // Create the profile
             let profile = UserProfile {
                 username: username,
@@ -159,101 +155,108 @@ mod UserProfileNFT {
                 created_at: timestamp,
                 updated_at: timestamp,
             };
-            
+
             // Store profile data
             self.profiles.write(token_id, profile);
             self.address_to_token_id.write(caller, token_id);
             self.has_profile.write(caller, true);
-            
+
             // Mint a single token to the caller
             self.erc1155._mint(caller, token_id, 1, ArrayTrait::<felt252>::new());
-            
+
             // Emit event
-            self.emit(Event::ProfileCreated(ProfileCreated {
-                token_id: token_id,
-                owner: caller,
-                username: username,
-                ipfs_hash: ipfs_hash,
-            }));
-            
+            self
+                .emit(
+                    Event::ProfileCreated(
+                        ProfileCreated {
+                            token_id: token_id,
+                            owner: caller,
+                            username: username,
+                            ipfs_hash: ipfs_hash,
+                        },
+                    ),
+                );
+
             // Return the token ID
             token_id
         }
-        
+
         // Update an existing profile
         #[external(v0)]
-        fn update_profile(
-            ref self: ContractState, 
-            username: ByteArray, 
-            ipfs_hash: ByteArray
-        ) {
+        fn update_profile(ref self: ContractState, username: ByteArray, ipfs_hash: ByteArray) {
             // Get caller address (the profile owner)
             let caller = get_caller_address();
-            
+
             // Check if user has a profile
             assert(self.has_profile.read(caller), 'User does not have a profile');
-            
+
             // Get the token ID associated with this address
             let token_id = self.address_to_token_id.read(caller);
-            
+
             // Ensure the caller owns this token
             assert(
-                self.erc1155.balance_of(caller, token_id) == 1, 
-                'Caller does not own this profile'
+                self.erc1155.balance_of(caller, token_id) == 1, 'Caller does not own this profile',
             );
-            
+
             // Get the current profile
             let mut profile = self.profiles.read(token_id);
-            
+
             // Update the profile
             profile.username = username;
             profile.ipfs_hash = ipfs_hash;
             profile.updated_at = starknet::get_block_timestamp();
-            
+
             // Save the updated profile
             self.profiles.write(token_id, profile);
-            
+
             // Emit event
-            self.emit(Event::ProfileUpdated(ProfileUpdated {
-                token_id: token_id,
-                owner: caller,
-                username: username,
-                ipfs_hash: ipfs_hash,
-            }));
+            self
+                .emit(
+                    Event::ProfileUpdated(
+                        ProfileUpdated {
+                            token_id: token_id,
+                            owner: caller,
+                            username: username,
+                            ipfs_hash: ipfs_hash,
+                        },
+                    ),
+                );
         }
-        
+
         // Get profile information by token ID
         #[external(v0)]
         fn get_profile_by_token_id(self: @ContractState, token_id: u256) -> UserProfile {
             // Return the profile associated with this token ID
             self.profiles.read(token_id)
         }
-        
+
         // Get profile information by wallet address
         #[external(v0)]
-        fn get_profile_by_address(self: @ContractState, wallet_address: ContractAddress) -> UserProfile {
+        fn get_profile_by_address(
+            self: @ContractState, wallet_address: ContractAddress,
+        ) -> UserProfile {
             // Check if address has a profile
             assert(self.has_profile.read(wallet_address), 'Address does not have a profile');
-            
+
             // Get the token ID associated with this address
             let token_id = self.address_to_token_id.read(wallet_address);
-            
+
             // Return the profile
             self.profiles.read(token_id)
         }
-        
+
         // Check if an address has a profile
         #[external(v0)]
         fn has_profile(self: @ContractState, wallet_address: ContractAddress) -> bool {
             self.has_profile.read(wallet_address)
         }
-        
+
         // Get token ID by wallet address
         #[external(v0)]
         fn get_token_id_by_address(self: @ContractState, wallet_address: ContractAddress) -> u256 {
             // Check if address has a profile
             assert(self.has_profile.read(wallet_address), 'Address does not have a profile');
-            
+
             // Return the token ID
             self.address_to_token_id.read(wallet_address)
         }
