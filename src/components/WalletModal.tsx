@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import {
@@ -10,14 +10,15 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import {
-  connect,
-  disconnect,
-  type ConnectOptions,
-  type DisconnectOptions,
-} from "@starknet-io/get-starknet";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/toast";
+import {
+  argent,
+  braavos,
+  useConnect,
+  useDisconnect,
+  useAccount,
+} from "@starknet-react/core";
 
 interface WalletModalProps {
   isOpen: boolean;
@@ -25,43 +26,55 @@ interface WalletModalProps {
 }
 
 const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
-  const [walletName, setWalletName] = useState("");
-  const router = useRouter();
   const { toast, dismiss } = useToast();
+  const router = useRouter();
 
-  const handleConnect = async (options?: ConnectOptions) => {
+  const { connect, isSuccess, error, } = useConnect();
+  const { disconnect } = useDisconnect();
+  const { address, connector, isConnected } = useAccount();
+
+  const [walletName, setWalletName] = useState("");
+
+  useEffect(() => {
+    if (connector?.id) {
+      setWalletName(connector.id);
+    }
+  }, [connector]);
+
+
+
+  useEffect(() => {
+    if (isSuccess && walletName) {
+      toast.success(`Connected to ${walletName}!`);
+      router.push("/");
+    }
+    else if (error) {
+      toast.error("Connection aborted")
+    }
+  }, [walletName, error, isSuccess, router]);
+
+  const handleConnect = async (wallet: "argent" | "braavos") => {
     onOpenChange(false);
-    
-    const loadingToastId = toast.loading("Connecting to wallet...");
-    
+    const toastId = toast.loading(`Connecting to ${wallet}...`);
+
     try {
-      const wallet = await connect(options);
-      if (wallet) {
-        setWalletName(wallet.name || "");
-        dismiss(loadingToastId);
-        toast.success(`Successfully connected to ${wallet.name || 'wallet'}!`);
-        router.push("/");
-        onOpenChange(false);
-      } else {
-        dismiss(loadingToastId);
-        toast.error("No wallet selected. Please try again.");
-      }
-    } catch (error) {
-      console.error("Connection failed:", error);
-      dismiss(loadingToastId);
-      toast.error("Failed to connect to wallet. Please try again.");
+      const connectorToUse = wallet === "argent" ? argent() : braavos();
+      await connect({ connector: connectorToUse });
+      dismiss(toastId);
+    } catch (err) {
+      dismiss(toastId);
+      console.error("Connection failed:", err);
+      toast.error(`Failed to connect to ${wallet}. Try again.`);
     }
   };
 
-  const handleDisconnect = async (options?: DisconnectOptions) => {
-    try {
-      await disconnect(options);
-      setWalletName("");
-      toast.success("Wallet disconnected successfully!");
-    } catch (err) {
-      console.error("Disconnection failed:", err);
-      toast.error("Failed to disconnect wallet. Please try again.");
-    }
+
+
+
+  const handleDisconnect = () => {
+    disconnect();
+    setWalletName("");
+    toast.success("Wallet disconnected successfully!");
   };
 
   return (
@@ -78,9 +91,7 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
           <Button
             className="w-full bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
             size="lg"
-            onClick={() =>
-              handleConnect({ include: ["braavos"] })
-            }
+            onClick={() => handleConnect("braavos")}
           >
             <Image
               src="/bravos.webp"
@@ -89,15 +100,13 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
               height={24}
               className="mr-2"
             />
-            Connect with Bravos
+            Connect with Braavos
           </Button>
 
           <Button
             className="w-full bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
             size="lg"
-            onClick={() =>
-              handleConnect({ include: ["argentX"] })
-            }
+            onClick={() => handleConnect("argent")}
           >
             <Image
               src="/argent.png"
@@ -113,15 +122,22 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
             className="w-full"
             variant="outline"
             size="lg"
-            onClick={() => handleDisconnect()}
+            onClick={handleDisconnect}
+            disabled={!address}
           >
             Disconnect
           </Button>
         </div>
 
-        {walletName && (
-          <div className="text-center pt-4 text-sm text-green-500">
-            Connected: {walletName}
+        {address && (
+          <div className="text-center pt-4 text-sm text-green-500 break-all">
+            Connected: {address}
+          </div>
+        )}
+
+        {error && (
+          <div className="text-center pt-2 text-sm text-red-500">
+            {error.message}
           </div>
         )}
       </DialogContent>
