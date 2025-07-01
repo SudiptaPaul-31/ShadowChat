@@ -31,7 +31,7 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
 
   const { connect, isSuccess, error, } = useConnect();
   const { disconnect } = useDisconnect();
-  const { address, connector, isConnected } = useAccount();
+  const { address, connector, } = useAccount();
 
   const [walletName, setWalletName] = useState("");
 
