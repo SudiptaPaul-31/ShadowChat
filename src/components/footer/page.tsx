@@ -1,5 +1,8 @@
+
+import { FaGithub, FaXTwitter, FaTelegram } from "react-icons/fa6";
 import Link from "next/link";
 import React from "react";
+import { ExternalLink } from "../external-link";
 
 function Footer() {
   return (
@@ -10,6 +13,19 @@ function Footer() {
           © {new Date().getFullYear()} ShadowChat. All rights reserved.
         </p>
       </div>
+
+      <div className="flex gap-3">
+        <ExternalLink href='#'>
+          <FaXTwitter className={stylesSocialIcons}/>
+        </ExternalLink>
+         <ExternalLink href='https://github.com/SudiptaPaul-31/ShadowChat'>
+          <FaGithub className={stylesSocialIcons}/>
+        </ExternalLink>
+         <ExternalLink href='https://t.me/shadowchat_od'>
+          <FaTelegram className={stylesSocialIcons}/>
+        </ExternalLink>
+      </div>
+
       <div className="flex items-center gap-4">
         <Link
           href="#"
@@ -35,3 +51,5 @@ function Footer() {
 }
 
 export default Footer;
+
+const stylesSocialIcons = "hover:opacity-85 transition-colors"
