@@ -87,12 +87,6 @@ export default function Navbar() {
             </Button>
           )}
 
-          <Button
-            size="sm"
-            className="bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800 dark:text-white"
-          >
-            Join Waitlist
-          </Button>
         </div>
       </div>
     </header>
