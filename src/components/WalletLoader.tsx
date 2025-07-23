@@ -13,16 +13,20 @@ const WalletLoader = ({ children }: WalletLoaderProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { restoreConnection } = useWalletContext();
-  const { address } = useAccount();
+  useAccount();
 
   useEffect(() => {
     const initializeWallet = async () => {
       try {
         setError(null);
         await restoreConnection();
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error('Failed to restore wallet connection:', error);
-        setError(error?.message || 'Failed to initialize wallet connection');
+        if (error && typeof error === 'object' && 'message' in error && typeof (error as { message?: unknown }).message === 'string') {
+          setError((error as { message: string }).message);
+        } else {
+          setError('Failed to initialize wallet connection');
+        }
         
         // Clear potentially corrupted data
         try {
