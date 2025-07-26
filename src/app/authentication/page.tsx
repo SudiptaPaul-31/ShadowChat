@@ -1,12 +1,15 @@
+// / 3. Updated Authentication component
 "use client";
 
 import React, { useState } from "react";
 import { WalletModal } from "@/components/WalletModal";
 import { Button } from "@/components/ui/button";
-import { Wallet } from "lucide-react";
+import { Wallet, CheckCircle } from "lucide-react";
+import { useWalletContext } from "@/context/WalletContext";
 
 export default function Authentication() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isConnected, address, connectorName } = useWalletContext();
 
   return (
     <section id="authentication" className="relative min-h-screen">
@@ -19,24 +22,48 @@ export default function Authentication() {
         <div className="flex flex-col items-center text-center space-y-4 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
             <span className="block bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Connect Your Wallet
+              {isConnected ? "Wallet Connected" : "Connect Your Wallet"}
             </span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Securely log in using your Starknet wallet for a privacy-focused experience.
+            {isConnected 
+              ? `Successfully connected with ${connectorName}` 
+              : "Securely log in using your Starknet wallet for a privacy-focused experience."
+            }
           </p>
         </div>
 
         {/* Wallet Connect Button */}
         <div className="flex justify-center">
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
-            onClick={() => setIsModalOpen(true)}
-          >
-            <Wallet className="mr-2 h-5 w-5" />
-            Connect Wallet
-          </Button>
+          {isConnected ? (
+            <div className="flex flex-col items-center space-y-4">
+              <div className="flex items-center space-x-2 text-green-600">
+                <CheckCircle className="h-5 w-5" />
+                <span className="font-medium">Wallet Connected</span>
+              </div>
+              <p className="text-sm text-muted-foreground break-all max-w-md">
+                {address}
+              </p>
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => setIsModalOpen(true)}
+              >
+                <Wallet className="mr-2 h-5 w-5" />
+                Manage Wallet
+              </Button>
+            </div>
+          ) : (
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <Wallet className="mr-2 h-5 w-5" />
+              Connect Wallet
+            </Button>
+          )}
+          
           <WalletModal
             isOpen={isModalOpen}
             onOpenChange={setIsModalOpen}
