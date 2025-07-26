@@ -49,7 +49,7 @@ function WalletCard() {
             <Copy className="w-4 h-4" />
           </button>
           <button
-            onClick={disconnect}
+            onClick={() => disconnect()}
             className="p-1 rounded hover:bg-red-100 dark:hover:bg-red-900"
             title="Disconnect wallet"
           >
