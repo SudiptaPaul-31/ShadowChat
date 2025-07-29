@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 const Hero = () => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <section id="hero" className="relative">
       <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[size:40px_40px] bg-no-repeat" />
@@ -30,7 +30,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <Button
               size="lg"
-              onClick={()=>router.push("/authentication")}
+              onClick={() => router.push("/authentication")}
               className="bg-gradient-to-r from-indigo-500 to-purple-700 hover:from-indigo-600 hover:to-purple-800 dark:text-white cursor-pointer"
             >
               Get Started.
