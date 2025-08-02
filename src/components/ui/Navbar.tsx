@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAccount, useDisconnect } from "@starknet-react/core";
 import { useToast } from "./toast";
+import { useRouter } from "next/navigation";
 
 
 export default function Navbar() {
@@ -16,6 +17,7 @@ export default function Navbar() {
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
   const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -73,9 +75,13 @@ export default function Navbar() {
 
           <Button asChild variant="ghost" size="sm" className="hidden md:flex">
             {isConnected ? (
-              <span className="cursor-pointer">
+              <button 
+                onClick={() => router.push('/anonymous-profile')}
+                className="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                title="Click to view your anonymous profile"
+              >
                 {address?.slice(0, 6)}...{address?.slice(-4)}
-              </span>
+              </button>
             ) : (
               <Link href="/authentication">Connect Your Wallet</Link>
             )}

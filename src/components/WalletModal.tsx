@@ -189,9 +189,16 @@ const WalletModal = ({ isOpen, onOpenChange }: WalletModalProps) => {
                 <p className="text-green-700 font-medium">
                   Connected with {connector?.id}
                 </p>
-                <p className="text-green-600 text-sm break-all mt-1">
+                <button 
+                  onClick={() => {
+                    router.push('/anonymous-profile');
+                    onOpenChange(false);
+                  }}
+                  className="text-green-600 text-sm break-all mt-1 hover:text-green-800 transition-colors cursor-pointer underline decoration-dotted underline-offset-2"
+                  title="Click to view your anonymous profile"
+                >
                   {address}
-                </p>
+                </button>
               </div>
               
               <Button
