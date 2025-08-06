@@ -9,7 +9,35 @@ on:
       - main
 
 jobs:
-  test-and-lint:
+  test-frontend:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run lint
+        run: npm run lint
+        
+      - name: Build application
+        run: npm run build
+        
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+        
+      - name: Run end-to-end tests
+        run: npm run test:e2e
+
+  test-contracts:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,10 +58,10 @@ jobs:
         working-directory: ./contract
         run: scarb build
 
-      - name: Run tests
-
+      - name: Run contract tests
         working-directory: ./contract
         run: scarb test
 
-      - name: Check linting
+      - name: Check contract linting
+        working-directory: ./contract
         run: scarb fmt --check
