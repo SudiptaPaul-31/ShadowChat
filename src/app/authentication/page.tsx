@@ -6,10 +6,12 @@ import { WalletModal } from "@/components/WalletModal";
 import { Button } from "@/components/ui/button";
 import { Wallet, CheckCircle } from "lucide-react";
 import { useWalletContext } from "@/context/WalletContext";
+import { useRouter } from "next/navigation";
 
 export default function Authentication() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isConnected, address, connectorName } = useWalletContext();
+  const router = useRouter();
 
   return (
     <section id="authentication" className="relative min-h-screen">
@@ -41,9 +43,13 @@ export default function Authentication() {
                 <CheckCircle className="h-5 w-5" />
                 <span className="font-medium">Wallet Connected</span>
               </div>
-              <p className="text-sm text-muted-foreground break-all max-w-md">
+              <button 
+                onClick={() => router.push('/anonymous-profile')}
+                className="text-sm text-muted-foreground break-all max-w-md hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer underline decoration-dotted underline-offset-4"
+                title="Click to view your anonymous profile"
+              >
                 {address}
-              </p>
+              </button>
               <Button
                 size="lg"
                 variant="outline"
